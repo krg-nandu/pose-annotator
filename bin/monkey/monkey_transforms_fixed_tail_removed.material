@@ -1,0 +1,856 @@
+
+material _missing_material_
+{
+    receive_shadows off
+    technique
+    {
+        pass
+        {
+            ambient 0.1 0.1 0.1 1.0
+            diffuse 0.8 0.0 0.0 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.3 0.3 0.3 1.0
+        }
+    }
+}
+
+// materials_TorsoBack_Shader genrated by blender2ogre 0.5.8
+
+material materials_TorsoBack_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_TorsoBack_Shader
+        {
+            ambient 0.2656210958957672 0.03911983594298363 0.2037080079317093 1.0
+            diffuse 0.21249687988306398 0.03129586922073169 0.16296640877375612 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_Hips_Shader genrated by blender2ogre 0.5.8
+
+material materials_Hips_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_Hips_Shader
+        {
+            ambient 0.13125786185264587 0.2255477011203766 0.04355725646018982 1.0
+            diffuse 0.10500629104683235 0.1804381635850394 0.034845805687394815 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_TorsoFront_Shader genrated by blender2ogre 0.5.8
+
+material materials_TorsoFront_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_TorsoFront_Shader
+        {
+            ambient 0.027929380536079407 0.1625395119190216 0.2255477011203766 1.0
+            diffuse 0.022343504761807687 0.13003161147283926 0.1804381635850394 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_Tail_Shader genrated by blender2ogre 0.5.8
+
+material materials_Tail_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_Tail_Shader
+        {
+            ambient 0.03646695241332054 0.06256707012653351 0.27267366647720337 1.0
+            diffuse 0.029173562365376382 0.050053656847084405 0.2181389364322861 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_UpperLegRight_Shader genrated by blender2ogre 0.5.8
+
+material materials_UpperLegRight_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_UpperLegRight_Shader
+        {
+            ambient 0.1205463781952858 0.23848143219947815 0.0463024266064167 1.0
+            diffuse 0.09643710399325345 0.19078514860250273 0.0370419418371013 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_LowerLegRight_Shader genrated by blender2ogre 0.5.8
+
+material materials_LowerLegRight_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_LowerLegRight_Shader
+        {
+            ambient 0.41853806376457214 0.024319255724549294 0.09278707206249237 1.0
+            diffuse 0.33483045600102024 0.019455404869547555 0.07422965875610199 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_FootRight_Shader genrated by blender2ogre 0.5.8
+
+material materials_FootRight_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_FootRight_Shader
+        {
+            ambient 0.03657235577702522 0.11481042206287384 0.772147536277771 1.0
+            diffuse 0.029257885057596633 0.09184833901894596 0.6177180382269327 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_ToeRight_Shader genrated by blender2ogre 0.5.8
+
+material materials_ToeRight_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_ToeRight_Shader
+        {
+            ambient 0.141610249876976 0.0067883944138884544 0.12215013056993484 1.0
+            diffuse 0.11328820158970654 0.005430715612034731 0.0977201059120909 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_UpperLegLeft_Shader genrated by blender2ogre 0.5.8
+
+material materials_UpperLegLeft_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_UpperLegLeft_Shader
+        {
+            ambient 0.010153301060199738 0.46562016010284424 0.06054344028234482 1.0
+            diffuse 0.00812264096919657 0.37249613363290024 0.048434752947609905 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_LowerLegLeft_Shader genrated by blender2ogre 0.5.8
+
+material materials_LowerLegLeft_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_LowerLegLeft_Shader
+        {
+            ambient 0.13217055797576904 0.49528366327285767 0.05230690538883209 1.0
+            diffuse 0.10573644795621107 0.3962269365225275 0.04184552493461258 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_FootLeft_Shader genrated by blender2ogre 0.5.8
+
+material materials_FootLeft_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_FootLeft_Shader
+        {
+            ambient 0.01583912782371044 0.14903715252876282 0.24510659277439117 1.0
+            diffuse 0.01267130244778547 0.11922972379967156 0.19608527714141122 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_ToeLeft_Shader genrated by blender2ogre 0.5.8
+
+material materials_ToeLeft_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_ToeLeft_Shader
+        {
+            ambient 0.1835501492023468 0.0812213122844696 0.020453467965126038 1.0
+            diffuse 0.14684012154996573 0.06497705079580918 0.01636277461592517 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_Neck_Shader genrated by blender2ogre 0.5.8
+
+material materials_Neck_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_Neck_Shader
+        {
+            ambient 0.012461923994123936 0.03406805172562599 0.20093196630477905 1.0
+            diffuse 0.00996953934385686 0.027254441786623618 0.16074557543911894 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_ShoulderLeft_Shader genrated by blender2ogre 0.5.8
+
+material materials_ShoulderLeft_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_ShoulderLeft_Shader
+        {
+            ambient 0.13680939376354218 0.03609952703118324 0.013410077430307865 1.0
+            diffuse 0.1094475166417288 0.02887962205528649 0.010728062104106872 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_ShoulderRight_Shader genrated by blender2ogre 0.5.8
+
+material materials_ShoulderRight_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_ShoulderRight_Shader
+        {
+            ambient 0.016324341297149658 0.02954939566552639 0.1835501492023468 1.0
+            diffuse 0.01305947323232104 0.02363951688467736 0.14684012154996573 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_UpperArmLeft_Shader genrated by blender2ogre 0.5.8
+
+material materials_UpperArmLeft_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_UpperArmLeft_Shader
+        {
+            ambient 0.3269922137260437 0.41853806376457214 0.07664082944393158 1.0
+            diffuse 0.2615937748788859 0.33483045600102024 0.06131266446877515 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_LowerArmLeft_Shader genrated by blender2ogre 0.5.8
+
+material materials_LowerArmLeft_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_LowerArmLeft_Shader
+        {
+            ambient 0.01119813323020935 0.1321047991514206 0.006887922529131174 1.0
+            diffuse 0.008958506717659631 0.1056838408959484 0.005510338105415374 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_HandLeft_Shader genrated by blender2ogre 0.5.8
+
+material materials_HandLeft_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_HandLeft_Shader
+        {
+            ambient 0.27422282099723816 0.04090752452611923 0.3172744810581207 1.0
+            diffuse 0.2193782600667813 0.03272602010855108 0.25381958862870313 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_FingerLeft_Shader genrated by blender2ogre 0.5.8
+
+material materials_FingerLeft_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_FingerLeft_Shader
+        {
+            ambient 0.020277325063943863 0.05476684495806694 0.0794474333524704 1.0
+            diffuse 0.016221860292879642 0.04381347661932522 0.06355794762906353 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_UpperArmRight_Shader genrated by blender2ogre 0.5.8
+
+material materials_UpperArmRight_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_UpperArmRight_Shader
+        {
+            ambient 0.14650799334049225 0.0727962777018547 0.02017168514430523 1.0
+            diffuse 0.11720639641890518 0.05823702302928302 0.01613734835590941 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_LowerArmRight_Shader genrated by blender2ogre 0.5.8
+
+material materials_LowerArmRight_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_LowerArmRight_Shader
+        {
+            ambient 0.04201940447092056 0.38243362307548523 0.7210021018981934 1.0
+            diffuse 0.033615524077646786 0.30594690301935223 0.5768016901135695 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_HandRight_Shader genrated by blender2ogre 0.5.8
+
+material materials_HandRight_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_HandRight_Shader
+        {
+            ambient 0.06939350068569183 0.001034984947182238 0.141610249876976 1.0
+            diffuse 0.05551480137578846 0.0008279879700837725 0.11328820158970654 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_FingerRight_Shader genrated by blender2ogre 0.5.8
+
+material materials_FingerRight_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_FingerRight_Shader
+        {
+            ambient 0.008707964792847633 0.16178792715072632 0.0013085617683827877 1.0
+            diffuse 0.006966371938085136 0.12943034364924344 0.001046849430305502 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// materials_Head_Shader genrated by blender2ogre 0.5.8
+
+material materials_Head_Shader 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass materials_Head_Shader
+        {
+            ambient 0.5260210633277893 0.0032167895697057247 0.018996596336364746 1.0
+            diffuse 0.42081685693289117 0.0025734316941116997 0.015197277295548872 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
