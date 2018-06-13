@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1202</width>
-    <height>820</height>
+    <height>810</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -182,7 +182,7 @@
       <rect>
        <x>10</x>
        <y>130</y>
-       <width>171</width>
+       <width>221</width>
        <height>131</height>
       </rect>
      </property>
@@ -198,27 +198,27 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>51</y>
-        <width>81</width>
-        <height>71</height>
+        <y>38</y>
+        <width>111</width>
+        <height>91</height>
        </rect>
       </property>
      </widget>
      <widget class="QDial" name="pitch">
       <property name="geometry">
        <rect>
-        <x>90</x>
-        <y>50</y>
-        <width>71</width>
-        <height>71</height>
+        <x>103</x>
+        <y>37</y>
+        <width>91</width>
+        <height>91</height>
        </rect>
       </property>
      </widget>
      <widget class="QLabel" name="yaw_label">
       <property name="geometry">
        <rect>
-        <x>26</x>
-        <y>33</y>
+        <x>42</x>
+        <y>27</y>
         <width>31</width>
         <height>17</height>
        </rect>
@@ -235,8 +235,8 @@
      <widget class="QLabel" name="pitch_label">
       <property name="geometry">
        <rect>
-        <x>111</x>
-        <y>33</y>
+        <x>134</x>
+        <y>26</y>
         <width>41</width>
         <height>17</height>
        </rect>
