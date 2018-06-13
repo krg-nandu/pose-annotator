@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QGroupBox" name="pcloud">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -23,10 +23,15 @@
       <height>741</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu Condensed</family>
+     </font>
+    </property>
     <property name="title">
      <string>Pointcloud view panel</string>
     </property>
-    <widget class="QFrame" name="frame">
+    <widget class="QFrame" name="view1">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -42,7 +47,7 @@
       <enum>QFrame::Raised</enum>
      </property>
     </widget>
-    <widget class="QFrame" name="frame_2">
+    <widget class="QFrame" name="view2">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -59,7 +64,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_2">
+   <widget class="QGroupBox" name="panel">
     <property name="geometry">
      <rect>
       <x>570</x>
@@ -68,10 +73,15 @@
       <height>741</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu Condensed</family>
+     </font>
+    </property>
     <property name="title">
      <string>Control panel</string>
     </property>
-    <widget class="QGroupBox" name="groupBox_3">
+    <widget class="QGroupBox" name="pos">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -80,10 +90,15 @@
        <height>91</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Ubuntu Condensed</family>
+      </font>
+     </property>
      <property name="title">
       <string>Position</string>
      </property>
-     <widget class="QSlider" name="horizontalSlider">
+     <widget class="QSlider" name="xpos">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -96,7 +111,7 @@
        <enum>Qt::Horizontal</enum>
       </property>
      </widget>
-     <widget class="QSlider" name="horizontalSlider_2">
+     <widget class="QSlider" name="ypos">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -109,7 +124,7 @@
        <enum>Qt::Horizontal</enum>
       </property>
      </widget>
-     <widget class="QSlider" name="horizontalSlider_3">
+     <widget class="QSlider" name="zpos">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -122,7 +137,7 @@
        <enum>Qt::Horizontal</enum>
       </property>
      </widget>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="x_label">
       <property name="geometry">
        <rect>
         <x>9</x>
@@ -132,10 +147,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>x</string>
+       <string>X</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="y_label">
       <property name="geometry">
        <rect>
         <x>9</x>
@@ -145,10 +160,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>y</string>
+       <string>Y</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="z_label">
       <property name="geometry">
        <rect>
         <x>9</x>
@@ -158,11 +173,11 @@
        </rect>
       </property>
       <property name="text">
-       <string>z</string>
+       <string>Z</string>
       </property>
      </widget>
     </widget>
-    <widget class="QGroupBox" name="groupBox_4">
+    <widget class="QGroupBox" name="ori">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -171,10 +186,15 @@
        <height>131</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Ubuntu Condensed</family>
+      </font>
+     </property>
      <property name="title">
       <string>Orientation</string>
      </property>
-     <widget class="QDial" name="dial">
+     <widget class="QDial" name="yaw">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -184,7 +204,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QDial" name="dial_2">
+     <widget class="QDial" name="pitch">
       <property name="geometry">
        <rect>
         <x>90</x>
@@ -194,7 +214,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QLabel" name="label_4">
+     <widget class="QLabel" name="yaw_label">
       <property name="geometry">
        <rect>
         <x>26</x>
@@ -203,42 +223,513 @@
         <height>17</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
       <property name="text">
-       <string>yaw</string>
+       <string>Yaw</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_5">
+     <widget class="QLabel" name="pitch_label">
       <property name="geometry">
        <rect>
-        <x>106</x>
+        <x>111</x>
         <y>33</y>
         <width>41</width>
         <height>17</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
       <property name="text">
-       <string>pitch</string>
+       <string>Pitch</string>
       </property>
      </widget>
     </widget>
-    <widget class="QGroupBox" name="groupBox_5">
+    <widget class="QGroupBox" name="pose">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>270</y>
        <width>311</width>
-       <height>371</height>
+       <height>411</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Ubuntu Condensed</family>
+      </font>
      </property>
      <property name="title">
       <string>Pose</string>
      </property>
+     <widget class="QSlider" name="l_collar">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>150</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="l_collar_label">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>149</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>L. Collar</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="l_arm">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>170</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="l_hand">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>190</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="l_thigh">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>210</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="l_shin">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>230</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="l_foot">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>250</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="r_collar">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>280</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="r_arm">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>300</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="r_hand">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>320</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="l_arm_label">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>170</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>L. Arm</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="l_shin_label">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>230</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>L. Shin</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="l_hand_label">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>190</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>L. Hand</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="l_foot_label">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>250</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>L. Foot</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="l_thigh_label">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>210</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>L. Thigh</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="r_thigh">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>340</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="r_foot">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>380</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="r_shin">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>360</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="r_collar_label">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>280</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>R. Collar</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="r_hand_label">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>321</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>R. Hand</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="r_foot_label">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>381</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>R. Foot</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="r_shin_label">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>361</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>R. Shin</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="r_thigh_label">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>341</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>R. Thigh</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="r_arm_label">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>301</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>R. Arm</string>
+      </property>
+     </widget>
+     <widget class="QDial" name="abdomen">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>46</y>
+        <width>91</width>
+        <height>91</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QDial" name="neck">
+      <property name="geometry">
+       <rect>
+        <x>104</x>
+        <y>46</y>
+        <width>91</width>
+        <height>91</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QDial" name="head">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>45</y>
+        <width>91</width>
+        <height>91</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="abdomen_label">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>33</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Abdomen</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="head_label">
+      <property name="geometry">
+       <rect>
+        <x>231</x>
+        <y>33</y>
+        <width>31</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Head</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="neck_label">
+      <property name="geometry">
+       <rect>
+        <x>135</x>
+        <y>34</y>
+        <width>31</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Neck</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="button_save">
      <property name="geometry">
       <rect>
        <x>120</x>
-       <y>690</y>
+       <y>699</y>
        <width>89</width>
        <height>25</height>
       </rect>
@@ -247,11 +738,11 @@
       <string>Save</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="button_prev">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>690</y>
+       <y>699</y>
        <width>89</width>
        <height>25</height>
       </rect>
@@ -260,11 +751,11 @@
       <string>Previous</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_3">
+    <widget class="QPushButton" name="button_next">
      <property name="geometry">
       <rect>
        <x>220</x>
-       <y>690</y>
+       <y>699</y>
        <width>89</width>
        <height>25</height>
       </rect>
@@ -273,6 +764,16 @@
       <string>Next</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QListWidget" name="listWidget">
+    <property name="geometry">
+     <rect>
+      <x>910</x>
+      <y>20</y>
+      <width>281</width>
+      <height>721</height>
+     </rect>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
