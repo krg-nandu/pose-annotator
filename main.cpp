@@ -7,11 +7,9 @@
 
 int main(int argc, char *argv[])
 {
-    std::cout << "hello!";
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-
     return a.exec();
 
 //    int d1 = 100; //500;

@@ -765,7 +765,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QListWidget" name="listWidget">
+   <widget class="QListWidget" name="ui_file_list">
     <property name="geometry">
      <rect>
       <x>910</x>

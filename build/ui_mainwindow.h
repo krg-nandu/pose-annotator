@@ -86,7 +86,7 @@ public:
     QPushButton *button_save;
     QPushButton *button_prev;
     QPushButton *button_next;
-    QListWidget *listWidget;
+    QListWidget *ui_file_list;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuHelp;
@@ -297,9 +297,9 @@ public:
         button_next = new QPushButton(panel);
         button_next->setObjectName(QString::fromUtf8("button_next"));
         button_next->setGeometry(QRect(220, 699, 89, 25));
-        listWidget = new QListWidget(centralWidget);
-        listWidget->setObjectName(QString::fromUtf8("listWidget"));
-        listWidget->setGeometry(QRect(910, 20, 281, 721));
+        ui_file_list = new QListWidget(centralWidget);
+        ui_file_list->setObjectName(QString::fromUtf8("ui_file_list"));
+        ui_file_list->setGeometry(QRect(910, 20, 281, 721));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
