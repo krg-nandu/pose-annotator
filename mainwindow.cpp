@@ -32,6 +32,19 @@ inline void get_file_list(MainWindow * w, QString path)
     }
 }
 
+void MainWindow::update_views(QString selectedFile)
+{
+    // first read in the depth image
+    cv::Mat img = cv::imread(selectedFile.toUtf8().constData(),cv::IMREAD_ANYDEPTH);
+    // make a colorized version of the depthmap
+    cv::Mat depth_color = IMGShow::colormap(img, this->d1, this->d2);
+
+
+    QImage qcolor(img.data, this->width, this->height, QImage::Format_RGB888);
+    this->ui->view1->setPixmap(QPixmap::fromImage(qcolor));
+    this->ui->view2->setPixmap(QPixmap::fromImage(qcolor));
+}
+
 /**
  * @brief Updates the file list on the right panel, on load and subsequent modifications
  * @param imageFiles
@@ -77,10 +90,5 @@ void MainWindow::on_ui_file_list_itemDoubleClicked(QListWidgetItem *item)
 {
     int curRow = this->ui->ui_file_list->currentRow();
     QString fullPath = this->listOfFiles[curRow].path + "/" + item->text();
-
-    cv::Mat img = cv::imread(fullPath.toUtf8().constData(),cv::IMREAD_ANYDEPTH);
-    img = IMGShow::colormap(img, this->d1, this->d2);
-    QImage qcolor(img.data, this->width, this->height, QImage::Format_RGB888);
-    this->ui->view1->setPixmap(QPixmap::fromImage(qcolor));
-    this->ui->view2->setPixmap(QPixmap::fromImage(qcolor));
+    update_views(fullPath);
 }
