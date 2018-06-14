@@ -93,6 +93,7 @@ void MainWindow::on_ui_file_list_itemDoubleClicked(QListWidgetItem *item)
     //this->ui->view1->setPalette(*palette);
     //this->ui->view1->repaint();
     this->ui->view1->setPixmap(QPixmap::fromImage(qcolor));
+    this->ui->view2->setPixmap(QPixmap::fromImage(qcolor));
     //cv::imshow("image",img);
     //cv::waitKey(0);
 }

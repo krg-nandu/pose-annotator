@@ -14,7 +14,6 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QDial>
-#include <QtGui/QFrame>
 #include <QtGui/QGroupBox>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
@@ -37,8 +36,8 @@ public:
     QAction *actionAbout;
     QWidget *centralWidget;
     QGroupBox *pcloud;
-    QFrame *view2;
     QLabel *view1;
+    QLabel *view2;
     QGroupBox *panel;
     QGroupBox *pos;
     QSlider *xpos;
@@ -110,14 +109,12 @@ public:
         QFont font;
         font.setFamily(QString::fromUtf8("Ubuntu Condensed"));
         pcloud->setFont(font);
-        view2 = new QFrame(pcloud);
-        view2->setObjectName(QString::fromUtf8("view2"));
-        view2->setGeometry(QRect(10, 380, 531, 351));
-        view2->setFrameShape(QFrame::StyledPanel);
-        view2->setFrameShadow(QFrame::Raised);
         view1 = new QLabel(pcloud);
         view1->setObjectName(QString::fromUtf8("view1"));
         view1->setGeometry(QRect(10, 30, 531, 341));
+        view2 = new QLabel(pcloud);
+        view2->setObjectName(QString::fromUtf8("view2"));
+        view2->setGeometry(QRect(10, 380, 531, 351));
         panel = new QGroupBox(centralWidget);
         panel->setObjectName(QString::fromUtf8("panel"));
         panel->setGeometry(QRect(570, 0, 331, 741));
@@ -331,6 +328,7 @@ public:
         actionAbout->setText(QApplication::translate("MainWindow", "About", 0, QApplication::UnicodeUTF8));
         pcloud->setTitle(QApplication::translate("MainWindow", "Pointcloud view panel", 0, QApplication::UnicodeUTF8));
         view1->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
+        view2->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
         panel->setTitle(QApplication::translate("MainWindow", "Control panel", 0, QApplication::UnicodeUTF8));
         pos->setTitle(QApplication::translate("MainWindow", "Position", 0, QApplication::UnicodeUTF8));
         x_label->setText(QApplication::translate("MainWindow", "X", 0, QApplication::UnicodeUTF8));
