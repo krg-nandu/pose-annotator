@@ -1,13 +1,260 @@
 #ifndef IMGPROC_HPP_
 #define IMGPROC_HPP_
 
-//#include <IMG.hpp>
 #include <stdio.h>
 #include <string>
 #include <opencv2/opencv.hpp>
 #include <opencv/highgui.h>
 #include <opencv/cv.h>
 #include <fstream>
+
+namespace IMGShow
+{
+// set short or float image
+inline cv::Mat cvtimage(cv::Mat img, double a = 0, double b = 0)
+{
+    if (a == 0 && b == 0)
+        cv::minMaxLoc(img, &a, &b);
+
+    double alpha = 255 / (b - a);
+    double beta = -a * 255 / (b - a);
+    cv::Mat color;
+    img.convertTo(color, CV_8UC3, alpha, beta);
+
+    if (color.channels() == 1)
+        cv::cvtColor(color, color, CV_GRAY2BGR);
+
+    return color;
+}
+inline cv::Mat colormap(cv::Mat img, double a = 0, double b = 0)
+{
+    cv::Mat color;
+    if (img.depth() == CV_8UC3 || img.depth() == CV_8UC1)
+        color = img.clone();
+    else
+        color = cvtimage(img, a, b);
+    cv::applyColorMap(color, color, cv::COLORMAP_JET);
+    return color;
+}
+inline void ShowFloatImage(const char * winname, IplImage *f, float a = 0,
+                           float b = 0)
+{
+    if (a == 0 && b == 0)
+    {
+        double da, db;
+        cv::minMaxLoc(cv::Mat(f), &da, &db);
+        a = da;
+        b = db;
+    }
+    float scale = 255 / (b - a);
+    float base = -a * 255 / (b - a);
+    IplImage *c = cvCreateImage(cvGetSize(f), 8, f->nChannels);
+    cvConvertScale(f, c, scale, base);
+    cvShowImage(winname, c);
+    cvReleaseImage(&c);
+}
+inline void ShowShortImage(const char * winname, IplImage *src, float a = 0,
+                           float b = 0)
+{
+    if (a == 0 && b == 0)
+    {
+        double da, db;
+        cv::minMaxLoc(cv::Mat(src), &da, &db);
+        a = da;
+        b = db;
+    }
+    float scale = 255 / (b - a);
+    float base = -a * 255 / (b - a);
+    IplImage *c = cvCreateImage(cvGetSize(src), 8, src->nChannels);
+    cvConvertScale(src, c, scale, base);
+    cvShowImage(winname, c);
+    cvReleaseImage(&c);
+}
+inline void ShowShortImage(const char * winname, IplImage src, float a = 0,
+                           float b = 0)
+{
+    ShowShortImage(winname, &src, a, b);
+}
+inline void ShowFloatImage(const char * winname, IplImage src, float a = 0,
+                           float b = 0)
+{
+    ShowFloatImage(winname, &src, a, b);
+}
+
+inline void CvtFloatImage(IplImage *src, IplImage *dst, double a = 0, double b =
+        0)
+{
+    if (a == 0 && b == 0)
+    {
+        cv::minMaxLoc(cv::Mat(src), &a, &b);
+    }
+    float scale = 255 / (b - a);
+    float base = -a * 255 / (b - a);
+    cvConvertScale(src, dst, scale, base);
+}
+
+inline void CvtFloatImage(cv::Mat &src, cv::Mat &dst, double a = 0,
+                          double b = 0)
+{
+    if (a == 0 && b == 0)
+    {
+        cv::minMaxLoc(src, &a, &b);
+    }
+    double scale = 255 / (b - a);
+    double base = -a * 255 / (b - a);
+    src.convertTo(dst, CV_8UC1, scale, base);
+}
+
+inline void CvtShortImage(IplImage *src, IplImage *dst, double a = 0, double b =
+        0)
+{
+    if (a == 0 && b == 0)
+    {
+        cv::minMaxLoc(cv::Mat(src), &a, &b);
+    }
+    double scale = 255 / (b - a);
+    double base = -a * 255 / (b - a);
+    cvConvertScale(src, dst, scale, base);
+}
+
+inline void CvtShortImage(cv::Mat &src, cv::Mat &dst, double a = 0,
+                          double b = 0)
+{
+    if (a == 0 && b == 0)
+    {
+        cv::minMaxLoc(src, &a, &b);
+    }
+    double scale = 255 / (b - a);
+    double base = -a * 255 / (b - a);
+    src.convertTo(dst, CV_8UC1, scale, base);
+}
+
+//inline void CvtShortImageColor(IplImage *src, IplImage *dst, double a = 0,
+//                               double b = 0)
+//{
+//    if (a == 0 && b == 0)
+//    {
+//        cv::minMaxLoc(cv::Mat(src), &a, &b);
+//    }
+//    double scale = 255 / (b - a);
+//    double base = -a * 255 / (b - a);
+//    IMGT<uchar> gray(cvGetSize(src), 8, 1);
+//    cvConvertScale(src, gray, scale, base);
+//    cvCvtColor(gray, dst, CV_GRAY2BGR);
+//}
+
+inline IplImage* OverlapImages(IplImage *src1, IplImage *src2)
+{
+    Utility_Check(src1->nChannels == src2->nChannels);
+    Utility_Check(src1->depth == src2->depth);
+    Utility_Check(src1->width == src2->width);
+    Utility_Check(src1->height == src2->height);
+
+    IplImage *dst = cvCreateImage(cvGetSize(src1), src1->depth,
+                                  src1->nChannels);
+    cvZero(dst);
+
+    if (src1->depth == 8)
+    {
+        uchar *p1 = (uchar*) src1->imageData;
+        uchar *p2 = (uchar*) src2->imageData;
+        uchar *p3 = (uchar*) dst->imageData;
+        for (int row = 0; row < src1->height; row++)
+        {
+            for (int col = 0; col < src1->widthStep; col++)
+            {
+                p3[col] = 0.5 * p1[col] + 0.5 * p2[col];
+            }
+            p1 += src1->widthStep;
+            p2 += src1->widthStep;
+            p3 += src1->widthStep;
+        }
+    }
+    else if (src1->depth == IPL_DEPTH_16S)
+    {
+        short *p1 = (short*) src1->imageData;
+        short *p2 = (short*) src2->imageData;
+        short *p3 = (short*) dst->imageData;
+        for (int row = 0; row < src1->height; row++)
+        {
+            for (int col = 0; col < src1->widthStep / 2; col++)
+            {
+                p3[col] = 0.5 * p1[col] + 0.5 * p2[col];
+            }
+            p1 += src1->widthStep;
+            p2 += src1->widthStep;
+            p3 += src1->widthStep;
+        }
+    }
+    else if (src1->depth == IPL_DEPTH_32F)
+    {
+        float *p1 = (float*) src1->imageData;
+        float *p2 = (float*) src2->imageData;
+        float *p3 = (float*) dst->imageData;
+        for (int row = 0; row < src1->height; row++)
+        {
+            for (int col = 0; col < src1->widthStep / 4; col++)
+            {
+                p3[col] = 0.5 * p1[col] + 0.5 * p2[col];
+            }
+            p1 += src1->widthStep;
+            p2 += src1->widthStep;
+            p3 += src1->widthStep;
+        }
+    }
+
+    return dst;
+}
+
+//! merge 2 image side-by-side (flag = 0), or up-down (flag = 1)
+inline IplImage* MergeImages(IplImage *src1, IplImage *src2, int flag = 0)
+{
+    Utility_Check(src1->nChannels == src2->nChannels);
+    Utility_Check(src1->depth == src2->depth);
+
+    IplImage *dst;
+
+    if (flag == 0) // merge images side-by-side
+    {
+        int width = src1->width + src2->width;
+        int height = MAX(src1->height, src2->height);
+
+        dst = cvCreateImage(cvSize(width, height), src1->depth,
+                            src1->nChannels);
+        cvZero(dst);
+
+        cvSetImageROI(dst, cvRect(0, 0, src1->width, src1->height));
+        cvCopy(src1, dst);
+        cvResetImageROI(dst);
+        cvSetImageROI(dst, cvRect(src1->width, 0, src2->width, src2->height));
+        cvCopy(src2, dst);
+        cvResetImageROI(dst);
+    }
+    else if (flag == 1) // merge images up-down
+    {
+        int width = MAX(src1->width, src2->width);
+        int height = src1->height + src2->height;
+
+        dst = cvCreateImage(cvSize(width, height), src1->depth,
+                            src1->nChannels);
+        cvZero(dst);
+
+        cvSetImageROI(dst, cvRect(0, 0, src1->width, src1->height));
+        cvCopy(src1, dst);
+        cvResetImageROI(dst);
+        cvSetImageROI(dst, cvRect(0, src1->height, src2->width, src2->height));
+        cvCopy(src2, dst);
+        cvResetImageROI(dst);
+    }
+
+    return dst;
+}
+
+inline IplImage* MergeImages(IplImage src1, IplImage src2, int flag = 0)
+{
+    return MergeImages(&src1, &src2, flag);
+}
+}
 
 struct vec3f
 {

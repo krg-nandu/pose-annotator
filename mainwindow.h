@@ -8,6 +8,9 @@
 #include <QFileInfo>
 #include <QListWidget>
 #include <opencv2/opencv.hpp>
+#include "Utility.h"
+#include "ImgProc.hpp"
+
 
 struct FileItem {
     QString path;
@@ -41,6 +44,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     std::vector<FileItem> listOfFiles;
+    const int d1 = 1000;
+    const int d2 = 3000;
+    const int width = 512;
+    const int height = 424;
+    const float focal = 365.456;
 
 private slots:
     void on_actionLoad_folder_triggered();

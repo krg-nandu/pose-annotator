@@ -78,22 +78,9 @@ void MainWindow::on_ui_file_list_itemDoubleClicked(QListWidgetItem *item)
     int curRow = this->ui->ui_file_list->currentRow();
     QString fullPath = this->listOfFiles[curRow].path + "/" + item->text();
 
-    cv::Mat img = cv::imread(fullPath.toUtf8().constData());
-    qDebug() << "read image";
-
-    //QPalette* palette = new QPalette();
-    cv::cvtColor(img, img, CV_BGR2RGB);
-    QImage qcolor(img.data, 512, 424, QImage::Format_RGB888);
-    //QPixmap pixmap = QPixmap::fromImage(qcolor);
-    //QBrush* brush = new QBrush(pixmap);
-    //palette->setBrush(QPalette::Background,*brush);
-
-    qDebug() << "set brush";
-
-    //this->ui->view1->setPalette(*palette);
-    //this->ui->view1->repaint();
+    cv::Mat img = cv::imread(fullPath.toUtf8().constData(),cv::IMREAD_ANYDEPTH);
+    img = IMGShow::colormap(img, this->d1, this->d2);
+    QImage qcolor(img.data, this->width, this->height, QImage::Format_RGB888);
     this->ui->view1->setPixmap(QPixmap::fromImage(qcolor));
     this->ui->view2->setPixmap(QPixmap::fromImage(qcolor));
-    //cv::imshow("image",img);
-    //cv::waitKey(0);
 }

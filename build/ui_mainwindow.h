@@ -327,8 +327,8 @@ public:
         actionLoad_folder->setText(QApplication::translate("MainWindow", "Load folder", 0, QApplication::UnicodeUTF8));
         actionAbout->setText(QApplication::translate("MainWindow", "About", 0, QApplication::UnicodeUTF8));
         pcloud->setTitle(QApplication::translate("MainWindow", "Pointcloud view panel", 0, QApplication::UnicodeUTF8));
-        view1->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        view2->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
+        view1->setText(QString());
+        view2->setText(QString());
         panel->setTitle(QApplication::translate("MainWindow", "Control panel", 0, QApplication::UnicodeUTF8));
         pos->setTitle(QApplication::translate("MainWindow", "Position", 0, QApplication::UnicodeUTF8));
         x_label->setText(QApplication::translate("MainWindow", "X", 0, QApplication::UnicodeUTF8));
