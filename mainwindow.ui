@@ -31,7 +31,7 @@
     <property name="title">
      <string>Pointcloud view panel</string>
     </property>
-    <widget class="QFrame" name="view1">
+    <widget class="QLabel" name="view1">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -40,14 +40,11 @@
        <height>341</height>
       </rect>
      </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+     <property name="text">
+      <string>TextLabel</string>
      </property>
     </widget>
-    <widget class="QFrame" name="view2">
+    <widget class="QLabel" name="view2">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -56,11 +53,8 @@
        <height>351</height>
       </rect>
      </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+     <property name="text">
+      <string>TextLabel</string>
      </property>
     </widget>
    </widget>

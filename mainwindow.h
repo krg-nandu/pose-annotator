@@ -6,6 +6,8 @@
 #include <QFileDialog>
 #include <QDebug>
 #include <QFileInfo>
+#include <QListWidget>
+#include <opencv2/opencv.hpp>
 
 struct FileItem {
     QString path;
@@ -42,6 +44,7 @@ public:
 
 private slots:
     void on_actionLoad_folder_triggered();
+    void on_ui_file_list_itemDoubleClicked(QListWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;

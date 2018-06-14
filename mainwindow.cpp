@@ -72,3 +72,27 @@ void MainWindow::on_actionLoad_folder_triggered()
     get_file_list(this,folderName.at(0));
     update_file_list();
 }
+
+void MainWindow::on_ui_file_list_itemDoubleClicked(QListWidgetItem *item)
+{
+    int curRow = this->ui->ui_file_list->currentRow();
+    QString fullPath = this->listOfFiles[curRow].path + "/" + item->text();
+
+    cv::Mat img = cv::imread(fullPath.toUtf8().constData());
+    qDebug() << "read image";
+
+    //QPalette* palette = new QPalette();
+    cv::cvtColor(img, img, CV_BGR2RGB);
+    QImage qcolor(img.data, 512, 424, QImage::Format_RGB888);
+    //QPixmap pixmap = QPixmap::fromImage(qcolor);
+    //QBrush* brush = new QBrush(pixmap);
+    //palette->setBrush(QPalette::Background,*brush);
+
+    qDebug() << "set brush";
+
+    //this->ui->view1->setPalette(*palette);
+    //this->ui->view1->repaint();
+    this->ui->view1->setPixmap(QPixmap::fromImage(qcolor));
+    //cv::imshow("image",img);
+    //cv::waitKey(0);
+}
