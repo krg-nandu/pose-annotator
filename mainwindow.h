@@ -10,7 +10,7 @@
 #include <opencv2/opencv.hpp>
 #include "Utility.h"
 #include "ImgProc.hpp"
-#include "FishPose.h"
+#include "MonkeyPose.h"
 
 struct FileItem {
     QString path;
@@ -44,13 +44,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     std::vector<FileItem> listOfFiles;
-    const int d1 = 1000;
-    const int d2 = 3000;
+    const int d1 = 100;
+    const int d2 = 10000;
     const int width = 512;
     const int height = 424;
     const float focal = 365.456;
     //FishPose_::FishPose fishpose(focal);
-    FishPose_::FishPose monkeypose;
+    MonkeyPose_::MonkeyPose *monkeypose;
     //    fishpose.fish_renderer.mCamera->setNearClipDistance(d1);
     //    fishpose.fish_renderer.mCamera->setFarClipDistance(d2);
     //    fishpose.Render();
@@ -58,6 +58,7 @@ public:
 private slots:
     void on_actionLoad_folder_triggered();
     void on_ui_file_list_itemDoubleClicked(QListWidgetItem *item);
+    void apply_current_pose_parameters();
 
 private:
     Ui::MainWindow *ui;

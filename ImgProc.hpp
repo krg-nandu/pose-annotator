@@ -26,16 +26,22 @@ inline cv::Mat cvtimage(cv::Mat img, double a = 0, double b = 0)
 
     return color;
 }
-inline cv::Mat colormap(cv::Mat img, double a = 0, double b = 0)
+inline cv::Mat colormap(cv::Mat img, double a = 0, double b = 0, bool gray = false)
 {
     cv::Mat color;
     if (img.depth() == CV_8UC3 || img.depth() == CV_8UC1)
         color = img.clone();
     else
         color = cvtimage(img, a, b);
-    cv::applyColorMap(color, color, cv::COLORMAP_JET);
+    if (gray) {
+        cv::applyColorMap(color, color, cv::COLORMAP_BONE);
+    }
+    else {
+        cv::applyColorMap(color, color, cv::COLORMAP_JET);
+    }
     return color;
 }
+
 inline void ShowFloatImage(const char * winname, IplImage *f, float a = 0,
                            float b = 0)
 {

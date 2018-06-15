@@ -41,8 +41,8 @@ SOURCES += \
 
 HEADERS += \
         mainwindow.h \
-        FishPose.h \
-        FishRender.h \
+        MonkeyPose.h \
+        MonkeyRender.h \
         ImgProc.hpp \
         Utility.h
 

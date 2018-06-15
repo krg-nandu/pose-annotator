@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1202</width>
-    <height>810</height>
+    <width>1090</width>
+    <height>1000</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>mPose3D</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QGroupBox" name="pcloud">
@@ -19,8 +19,8 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>551</width>
-      <height>741</height>
+      <width>1071</width>
+      <height>471</height>
      </rect>
     </property>
     <property name="font">
@@ -36,8 +36,8 @@
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>531</width>
-       <height>341</height>
+       <width>512</width>
+       <height>424</height>
       </rect>
      </property>
      <property name="text">
@@ -47,10 +47,10 @@
     <widget class="QLabel" name="view2">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>380</y>
-       <width>531</width>
-       <height>351</height>
+       <x>540</x>
+       <y>30</y>
+       <width>512</width>
+       <height>424</height>
       </rect>
      </property>
      <property name="text">
@@ -61,10 +61,10 @@
    <widget class="QGroupBox" name="panel">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>0</y>
-      <width>331</width>
-      <height>741</height>
+      <x>430</x>
+      <y>470</y>
+      <width>651</width>
+      <height>461</height>
      </rect>
     </property>
     <property name="font">
@@ -78,8 +78,8 @@
     <widget class="QGroupBox" name="pos">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>30</y>
+       <x>330</x>
+       <y>180</y>
        <width>311</width>
        <height>91</height>
       </rect>
@@ -174,10 +174,10 @@
     <widget class="QGroupBox" name="ori">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>130</y>
-       <width>221</width>
-       <height>131</height>
+       <x>330</x>
+       <y>30</y>
+       <width>311</width>
+       <height>141</height>
       </rect>
      </property>
      <property name="font">
@@ -192,7 +192,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>38</y>
+        <y>45</y>
         <width>111</width>
         <height>91</height>
        </rect>
@@ -201,8 +201,8 @@
      <widget class="QDial" name="pitch">
       <property name="geometry">
        <rect>
-        <x>103</x>
-        <y>37</y>
+        <x>110</x>
+        <y>45</y>
         <width>91</width>
         <height>91</height>
        </rect>
@@ -212,7 +212,7 @@
       <property name="geometry">
        <rect>
         <x>42</x>
-        <y>27</y>
+        <y>34</y>
         <width>31</width>
         <height>17</height>
        </rect>
@@ -229,8 +229,8 @@
      <widget class="QLabel" name="pitch_label">
       <property name="geometry">
        <rect>
-        <x>134</x>
-        <y>26</y>
+        <x>140</x>
+        <y>35</y>
         <width>41</width>
         <height>17</height>
        </rect>
@@ -244,12 +244,40 @@
        <string>Pitch</string>
       </property>
      </widget>
+     <widget class="QLabel" name="roll_label">
+      <property name="geometry">
+       <rect>
+        <x>243</x>
+        <y>35</y>
+        <width>41</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Ubuntu Condensed</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Roll</string>
+      </property>
+     </widget>
+     <widget class="QDial" name="roll">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>44</y>
+        <width>91</width>
+        <height>91</height>
+       </rect>
+      </property>
+     </widget>
     </widget>
     <widget class="QGroupBox" name="pose">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>270</y>
+       <y>30</y>
        <width>311</width>
        <height>411</height>
       </rect>
@@ -722,8 +750,8 @@
     <widget class="QPushButton" name="button_save">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>699</y>
+       <x>440</x>
+       <y>410</y>
        <width>89</width>
        <height>25</height>
       </rect>
@@ -735,8 +763,8 @@
     <widget class="QPushButton" name="button_prev">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>699</y>
+       <x>330</x>
+       <y>410</y>
        <width>89</width>
        <height>25</height>
       </rect>
@@ -748,8 +776,8 @@
     <widget class="QPushButton" name="button_next">
      <property name="geometry">
       <rect>
-       <x>220</x>
-       <y>699</y>
+       <x>550</x>
+       <y>410</y>
        <width>89</width>
        <height>25</height>
       </rect>
@@ -762,11 +790,31 @@
    <widget class="QListWidget" name="ui_file_list">
     <property name="geometry">
      <rect>
-      <x>910</x>
-      <y>20</y>
-      <width>281</width>
-      <height>721</height>
+      <x>10</x>
+      <y>490</y>
+      <width>411</width>
+      <height>441</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>470</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu Condensed</family>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>File explorer</string>
     </property>
    </widget>
   </widget>
@@ -775,7 +823,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1202</width>
+     <width>1090</width>
      <height>22</height>
     </rect>
    </property>

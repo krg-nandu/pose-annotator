@@ -51,6 +51,8 @@ public:
     QDial *pitch;
     QLabel *yaw_label;
     QLabel *pitch_label;
+    QLabel *roll_label;
+    QDial *roll;
     QGroupBox *pose;
     QSlider *l_collar;
     QLabel *l_collar_label;
@@ -86,6 +88,7 @@ public:
     QPushButton *button_prev;
     QPushButton *button_next;
     QListWidget *ui_file_list;
+    QLabel *label;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuHelp;
@@ -96,7 +99,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1202, 810);
+        MainWindow->resize(1090, 1000);
         actionLoad_folder = new QAction(MainWindow);
         actionLoad_folder->setObjectName(QString::fromUtf8("actionLoad_folder"));
         actionAbout = new QAction(MainWindow);
@@ -105,23 +108,23 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         pcloud = new QGroupBox(centralWidget);
         pcloud->setObjectName(QString::fromUtf8("pcloud"));
-        pcloud->setGeometry(QRect(10, 0, 551, 741));
+        pcloud->setGeometry(QRect(10, 0, 1071, 471));
         QFont font;
         font.setFamily(QString::fromUtf8("Ubuntu Condensed"));
         pcloud->setFont(font);
         view1 = new QLabel(pcloud);
         view1->setObjectName(QString::fromUtf8("view1"));
-        view1->setGeometry(QRect(10, 30, 531, 341));
+        view1->setGeometry(QRect(10, 30, 512, 424));
         view2 = new QLabel(pcloud);
         view2->setObjectName(QString::fromUtf8("view2"));
-        view2->setGeometry(QRect(10, 380, 531, 351));
+        view2->setGeometry(QRect(540, 30, 512, 424));
         panel = new QGroupBox(centralWidget);
         panel->setObjectName(QString::fromUtf8("panel"));
-        panel->setGeometry(QRect(570, 0, 331, 741));
+        panel->setGeometry(QRect(430, 470, 651, 461));
         panel->setFont(font);
         pos = new QGroupBox(panel);
         pos->setObjectName(QString::fromUtf8("pos"));
-        pos->setGeometry(QRect(10, 30, 311, 91));
+        pos->setGeometry(QRect(330, 180, 311, 91));
         pos->setFont(font);
         xpos = new QSlider(pos);
         xpos->setObjectName(QString::fromUtf8("xpos"));
@@ -146,25 +149,32 @@ public:
         z_label->setGeometry(QRect(9, 67, 16, 17));
         ori = new QGroupBox(panel);
         ori->setObjectName(QString::fromUtf8("ori"));
-        ori->setGeometry(QRect(10, 130, 221, 131));
+        ori->setGeometry(QRect(330, 30, 311, 141));
         ori->setFont(font);
         yaw = new QDial(ori);
         yaw->setObjectName(QString::fromUtf8("yaw"));
-        yaw->setGeometry(QRect(0, 38, 111, 91));
+        yaw->setGeometry(QRect(0, 45, 111, 91));
         pitch = new QDial(ori);
         pitch->setObjectName(QString::fromUtf8("pitch"));
-        pitch->setGeometry(QRect(103, 37, 91, 91));
+        pitch->setGeometry(QRect(110, 45, 91, 91));
         yaw_label = new QLabel(ori);
         yaw_label->setObjectName(QString::fromUtf8("yaw_label"));
-        yaw_label->setGeometry(QRect(42, 27, 31, 17));
+        yaw_label->setGeometry(QRect(42, 34, 31, 17));
         yaw_label->setFont(font);
         pitch_label = new QLabel(ori);
         pitch_label->setObjectName(QString::fromUtf8("pitch_label"));
-        pitch_label->setGeometry(QRect(134, 26, 41, 17));
+        pitch_label->setGeometry(QRect(140, 35, 41, 17));
         pitch_label->setFont(font);
+        roll_label = new QLabel(ori);
+        roll_label->setObjectName(QString::fromUtf8("roll_label"));
+        roll_label->setGeometry(QRect(243, 35, 41, 17));
+        roll_label->setFont(font);
+        roll = new QDial(ori);
+        roll->setObjectName(QString::fromUtf8("roll"));
+        roll->setGeometry(QRect(210, 44, 91, 91));
         pose = new QGroupBox(panel);
         pose->setObjectName(QString::fromUtf8("pose"));
-        pose->setGeometry(QRect(10, 270, 311, 411));
+        pose->setGeometry(QRect(10, 30, 311, 411));
         pose->setFont(font);
         l_collar = new QSlider(pose);
         l_collar->setObjectName(QString::fromUtf8("l_collar"));
@@ -285,20 +295,28 @@ public:
         neck_label->setFont(font);
         button_save = new QPushButton(panel);
         button_save->setObjectName(QString::fromUtf8("button_save"));
-        button_save->setGeometry(QRect(120, 699, 89, 25));
+        button_save->setGeometry(QRect(440, 410, 89, 25));
         button_prev = new QPushButton(panel);
         button_prev->setObjectName(QString::fromUtf8("button_prev"));
-        button_prev->setGeometry(QRect(20, 699, 89, 25));
+        button_prev->setGeometry(QRect(330, 410, 89, 25));
         button_next = new QPushButton(panel);
         button_next->setObjectName(QString::fromUtf8("button_next"));
-        button_next->setGeometry(QRect(220, 699, 89, 25));
+        button_next->setGeometry(QRect(550, 410, 89, 25));
         ui_file_list = new QListWidget(centralWidget);
         ui_file_list->setObjectName(QString::fromUtf8("ui_file_list"));
-        ui_file_list->setGeometry(QRect(910, 20, 281, 721));
+        ui_file_list->setGeometry(QRect(10, 490, 411, 441));
+        label = new QLabel(centralWidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(10, 470, 111, 17));
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("Ubuntu Condensed"));
+        font1.setBold(true);
+        font1.setWeight(75);
+        label->setFont(font1);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1202, 22));
+        menuBar->setGeometry(QRect(0, 0, 1090, 22));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuHelp = new QMenu(menuBar);
@@ -323,7 +341,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "mPose3D", 0, QApplication::UnicodeUTF8));
         actionLoad_folder->setText(QApplication::translate("MainWindow", "Load folder", 0, QApplication::UnicodeUTF8));
         actionAbout->setText(QApplication::translate("MainWindow", "About", 0, QApplication::UnicodeUTF8));
         pcloud->setTitle(QApplication::translate("MainWindow", "Pointcloud view panel", 0, QApplication::UnicodeUTF8));
@@ -337,6 +355,7 @@ public:
         ori->setTitle(QApplication::translate("MainWindow", "Orientation", 0, QApplication::UnicodeUTF8));
         yaw_label->setText(QApplication::translate("MainWindow", "Yaw", 0, QApplication::UnicodeUTF8));
         pitch_label->setText(QApplication::translate("MainWindow", "Pitch", 0, QApplication::UnicodeUTF8));
+        roll_label->setText(QApplication::translate("MainWindow", "Roll", 0, QApplication::UnicodeUTF8));
         pose->setTitle(QApplication::translate("MainWindow", "Pose", 0, QApplication::UnicodeUTF8));
         l_collar_label->setText(QApplication::translate("MainWindow", "L. Collar", 0, QApplication::UnicodeUTF8));
         l_arm_label->setText(QApplication::translate("MainWindow", "L. Arm", 0, QApplication::UnicodeUTF8));
@@ -356,6 +375,7 @@ public:
         button_save->setText(QApplication::translate("MainWindow", "Save", 0, QApplication::UnicodeUTF8));
         button_prev->setText(QApplication::translate("MainWindow", "Previous", 0, QApplication::UnicodeUTF8));
         button_next->setText(QApplication::translate("MainWindow", "Next", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("MainWindow", "File explorer", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

@@ -1,7 +1,7 @@
-#ifndef FISHPOSE_HPP_
-#define FISHPOSE_HPP_
+#ifndef MONKEYPOSE_HPP_
+#define MONKEYPOSE_HPP_
 
-#include "FishRender.h"
+#include "MonkeyRender.h"
 #include <OGRE/OgreManualObject.h>
 #include <fstream>
 #include <GL/freeglut.h>
@@ -9,23 +9,23 @@
 #include "Utility.h"
 #include <opencv2/opencv.hpp>
 
-namespace FishPose_
+namespace MonkeyPose_
 {
 	using namespace Ogre;
 	using namespace std;
 
-	struct FishPose
+    struct MonkeyPose
 	{
 		// the tiny ogre renderer
-		FishRenderer fish_renderer;
+        MonkeyRenderer monkey_renderer;
 		// storing the index of the joints to be controlled
 		std::vector<int> backbone;
 		// number of bones (technically!)
 		int nJoint;
 
 		SceneNode *root;
-		SceneNode* fish_node;
-		Entity* fish_entity;
+        SceneNode* monkey_node;
+        Entity* monkey_entity;
 		SceneManager *sceneMgr;
 		Skeleton* skeleton;
 
@@ -41,12 +41,12 @@ namespace FishPose_
 
 		ManualObject *depthmap;
 
-		FishPose(float focal, int width = 512, int height = 424) :
+        MonkeyPose(float focal, int width = 512, int height = 424) :
 			depthmap(0)
 		{
 
 			// init render
-			fish_renderer.Init();
+            monkey_renderer.Init();
 
 			depth = cvCreateImage(cvSize(width, height), 32, 1);
 			rgb = cvCreateImage(cvSize(width, height), 8, 3);
@@ -55,31 +55,28 @@ namespace FishPose_
 			// init camera
 			float fovy = atan(height/2/focal) * 2;
 			std::cout << fovy << std::endl;
-			fish_renderer.mCamera->setFOVy(Radian(fovy));
+            monkey_renderer.mCamera->setFOVy(Radian(fovy));
+            monkey_renderer.mCamera->setPosition(0, 0, 0);
+            monkey_renderer.mCamera->lookAt(0, 0, -1);
 
-			//fish_renderer.mCamera->setFOVy(Degree(48.4836));
-			fish_renderer.mCamera->setPosition(0, 0, 0);
-			//fish_renderer.mCamera->lookAt(-1500, 0, 0);
-			fish_renderer.mCamera->lookAt(0, 0, -1);
+            // init monkey_node
+            monkey_node = monkey_renderer.monkeyNode;
+            Utility_Check(monkey_node);
 
-			// init fish_node
-			fish_node = fish_renderer.fishNode;
-			Utility_Check(fish_node);
-
-			sceneMgr = fish_renderer.mSceneMgr;
+            sceneMgr = monkey_renderer.mSceneMgr;
 			root = sceneMgr->getRootSceneNode();
-			fish_entity = fish_renderer.fishEntity;
+            monkey_entity = monkey_renderer.monkeyEntity;
 
-			Utility_Check(fish_entity);
-			Utility_Check(fish_entity->hasSkeleton());
+            Utility_Check(monkey_entity);
+            Utility_Check(monkey_entity->hasSkeleton());
 
 			// obtaining the skeleton
-			skeleton = fish_entity->getSkeleton();
+            skeleton = monkey_entity->getSkeleton();
 
 			nJoint = skeleton->getNumBones();
 			cout << "nJoint: "<< nJoint << endl;
 
-			orgscale = fish_node->getScale();
+            orgscale = monkey_node->getScale();
 
 			for (int i = 0; i < nJoint; i++)
 			{
@@ -139,7 +136,7 @@ namespace FishPose_
 
 		}
 
-		~FishPose()
+        ~MonkeyPose()
 		{
 			if (shortdepth)
 			{
@@ -157,15 +154,15 @@ namespace FishPose_
 
 		void Render()
 		{
-			fish_renderer.RenderOneFrame();
+            monkey_renderer.RenderOneFrame();
 			glReadPixels(0, 0, depth->width, depth->height, GL_DEPTH_COMPONENT,
 				GL_FLOAT, depth->imageData);
 			glReadPixels(0, 0, rgb->width, rgb->height, GL_BGR_EXT, GL_UNSIGNED_BYTE,
 				rgb->imageData);
 			cvFlip(rgb, rgb, 0);
 			cvFlip(depth, depth, 0);
-			float d1 = fish_renderer.mCamera->getNearClipDistance();
-			float d2 = fish_renderer.mCamera->getFarClipDistance();
+            float d1 = monkey_renderer.mCamera->getNearClipDistance();
+            float d2 = monkey_renderer.mCamera->getFarClipDistance();
 			cvConvertScale(depth, shortdepth, d2 - d1, d1);
 		}
 
@@ -173,7 +170,7 @@ namespace FishPose_
 		{
 			Bone* bone = skeleton->getBone(i);			
 			Vector3 a = bone->convertLocalToWorldPosition(Vector3::ZERO);
-			a = fish_node->convertLocalToWorldPosition(a);
+            a = monkey_node->convertLocalToWorldPosition(a);
 			
 			cout << a << endl;
 
@@ -202,7 +199,7 @@ namespace FishPose_
 		{
 			// Just randomize scale for now. Later add to param properly
 			double scale = fRand(0.8,1.1);
-			fish_node->setScale(orgscale * scale);
+            monkey_node->setScale(orgscale * scale);
 
 			int idx;
 			cout << "Entering SETPOSE... \n";
@@ -233,7 +230,7 @@ namespace FishPose_
 		{
 			Bone* bone = skeleton->getBone(joint);			
 			Vector3 pos = bone->convertLocalToWorldPosition(Vector3::ZERO);
-			pos = fish_node->convertLocalToWorldPosition(pos);
+            pos = monkey_node->convertLocalToWorldPosition(pos);
 			return pos;
 		}
 
@@ -364,4 +361,4 @@ namespace FishPose_
 		return rot;
 	}
 }
-#endif /* FISHPOSE_HPP_ */
+#endif /* MONKEYPOSE_HPP_ */

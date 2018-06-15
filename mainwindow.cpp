@@ -6,6 +6,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // initialize the monkey pose class
+    monkeypose = new MonkeyPose_::MonkeyPose(focal);
+    monkeypose->monkey_renderer.mCamera->setNearClipDistance(d1);
+    monkeypose->monkey_renderer.mCamera->setFarClipDistance(d2);
+    monkeypose->monkey_node->setPosition(0,-200,-1200);
 }
 
 MainWindow::~MainWindow()
@@ -32,6 +37,11 @@ inline void get_file_list(MainWindow * w, QString path)
     }
 }
 
+void::MainWindow::apply_current_pose_parameters()
+{
+    this->monkeypose->Render();
+}
+
 void MainWindow::update_views(QString selectedFile)
 {
     // first read in the depth image
@@ -39,10 +49,19 @@ void MainWindow::update_views(QString selectedFile)
     // make a colorized version of the depthmap
     cv::Mat depth_color = IMGShow::colormap(img, this->d1, this->d2);
 
+    // apply the current pose parameters and get the rendered image
+    apply_current_pose_parameters();
 
-    QImage qcolor(img.data, this->width, this->height, QImage::Format_RGB888);
+    cv::Mat render_image = this->monkeypose->shortdepth;
+    render_image = IMGShow::colormap(render_image, this->d1, this->d2, true);
+
+    cv::Mat overlap_view1 = 0.6*depth_color + 0.4*render_image;
+    QImage qcolor((const unsigned char*)(overlap_view1.data), this->width, this->height, QImage::Format_RGB888);
+    //IMGShow::OverlapImages();
+
     this->ui->view1->setPixmap(QPixmap::fromImage(qcolor));
-    this->ui->view2->setPixmap(QPixmap::fromImage(qcolor));
+
+    //this->ui->view2->setPixmap(QPixmap::fromImage(qcolor));
 }
 
 /**

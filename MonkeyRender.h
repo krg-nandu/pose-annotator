@@ -11,21 +11,21 @@
 #include <OGRE/OgreEntity.h>
 #include <OGRE/OgreWindowEventUtilities.h>
 
-struct FishRenderer
+struct MonkeyRenderer
 {
 	Ogre::Root *mRoot;
 	Ogre::Camera* mCamera;
 	Ogre::SceneManager* mSceneMgr;
 	Ogre::RenderWindow* mWindow;
-	Ogre::Entity* fishEntity;
-	Ogre::SceneNode* fishNode;
+    Ogre::Entity* monkeyEntity;
+    Ogre::SceneNode* monkeyNode;
 
-	FishRenderer(void) :
+    MonkeyRenderer(void) :
 		mRoot(0), mCamera(0), mSceneMgr(0), mWindow(0)
 	{
 	}
 	
-	virtual ~FishRenderer(void) {
+    virtual ~MonkeyRenderer(void) {
 		delete mRoot;
 	}
 
@@ -89,17 +89,17 @@ struct FishRenderer
 		Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
 		Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 		
-		fishEntity = mSceneMgr->createEntity("Monkey", "MonkeyMESHMesh.mesh"); ///
-		fishNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+        monkeyEntity = mSceneMgr->createEntity("Monkey", "MonkeyMESHMesh.mesh"); ///
+        monkeyNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 		
-		fishNode->attachObject(fishEntity);
-		//fishNode->setPosition(-1200, 0, 0);
-		fishNode->setPosition(0, 0, -1200);
+        monkeyNode->attachObject(monkeyEntity);
+        //monkeyNode->setPosition(-1200, 0, 0);
+        monkeyNode->setPosition(0, 0, -1200);
 
-		//fishNode->setScale(40, 40, 40);
-		//fishNode->setScale(500, 500, 500);
-		//fishNode->setScale(7.5, 7.5, 7.5);
-		fishNode->setScale(6., 6., 6.);
+        //monkeyNode->setScale(40, 40, 40);
+        //monkeyNode->setScale(500, 500, 500);
+        //monkeyNode->setScale(7.5, 7.5, 7.5);
+        monkeyNode->setScale(6., 6., 6.);
 
 		// Set ambient light
 		mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
