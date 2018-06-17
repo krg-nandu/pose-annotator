@@ -44,16 +44,20 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     std::vector<FileItem> listOfFiles;
+
     const int d1 = 100;
     const int d2 = 10000;
     const int width = 512;
     const int height = 424;
+    const int cx = width/2;
+    const int cy = height/2;
     const float focal = 365.456;
-    //FishPose_::FishPose fishpose(focal);
+
     MonkeyPose_::MonkeyPose *monkeypose;
-    //    fishpose.fish_renderer.mCamera->setNearClipDistance(d1);
-    //    fishpose.fish_renderer.mCamera->setFarClipDistance(d2);
-    //    fishpose.Render();
+    vec3f uvdtoxyz(vec3f);
+    vec3f xyztouvd(vec3f);
+    std::vector<vec3f> get_point_list(cv::Mat);
+    void paint_on_image(std::vector<vec3f>);
 
 private slots:
     void on_actionLoad_folder_triggered();

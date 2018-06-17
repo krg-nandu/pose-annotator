@@ -37,10 +37,83 @@ inline void get_file_list(MainWindow * w, QString path)
     }
 }
 
-void::MainWindow::apply_current_pose_parameters()
+
+/**
+ * @brief MainWindow::xyztouvd
+ * @param xyz
+ * @return
+ */
+vec3f MainWindow::xyztouvd(vec3f xyz) {
+    vec3f uvd;
+    uvd.y = xyz.x/xyz.z * focal + cx;
+    uvd.x = -xyz.y/xyz.z * focal + cy;
+    uvd.z = -xyz.z;
+    return uvd;
+}
+
+/**
+ * @brief MainWindow::uvdtoxyz
+ * @param uvd
+ * @return
+ */
+vec3f MainWindow::uvdtoxyz(vec3f uvd){
+    vec3f xyz;
+    xyz.x = ((cx - uvd.y) / focal) * uvd.z;
+    xyz.y = ((uvd.x - cy) / focal) * uvd.z;
+    xyz.z = -uvd.z;
+    return xyz;
+}
+
+std::vector<vec3f> MainWindow::get_point_list(cv::Mat img)
+{
+    std::vector<vec3f> dpt_pts;
+    for (int r = 0; r < img.rows; r++){
+        for (int c = 0; c < img.cols; c++){
+            vec3f v = MainWindow::uvdtoxyz(vec3f(r,c,img.at<u_int16_t>(r,c)));
+            dpt_pts.push_back(v);
+        }
+    }
+    return dpt_pts;
+}
+
+inline void rotate_points(std::vector<vec3f> pts, vec3f mu, float angle)
+{
+    // rotation about z
+    for(auto pt : pts){
+        pt -= mu;
+        vec3f v;
+        v.x = pt.x * cos(angle) - pt.y * sin(angle);
+        v.y = pt.x * sin(angle) + pt.y * cos(angle);
+        v.z = pt.z;
+        pt = v;
+        pt += mu;
+    }
+}
+
+void MainWindow::paint_on_image(std::vector<vec3f> pts)
+{
+    cv::Mat img(cv::Size(512, 424), CV_8UC3, cv::Scalar(0,0,0));
+
+    for (auto pt : pts){
+        vec3f v = xyztouvd(pt);
+        if (v.z > 9000)
+            continue;
+        img.at<ushort>(v.x,v.y) = (128,128,128);
+    }
+
+    cv::imshow("win",img);
+    cv::waitKey(0);
+}
+
+void MainWindow::apply_current_pose_parameters()
 {
     this->monkeypose->Render();
 }
+
+//void MainWindow::get_side_view()
+//{
+
+//}
 
 void MainWindow::update_views(QString selectedFile)
 {
@@ -60,8 +133,13 @@ void MainWindow::update_views(QString selectedFile)
     //IMGShow::OverlapImages();
 
     this->ui->view1->setPixmap(QPixmap::fromImage(qcolor));
-
     //this->ui->view2->setPixmap(QPixmap::fromImage(qcolor));
+
+    std::vector<vec3f> dpt_pts = get_point_list(img);
+    Ogre::Vector3 root = this->monkeypose->GetJointPosition(1);
+    vec3f mu(root.x,root.y,root.z);
+    rotate_points(dpt_pts,mu,140);
+    paint_on_image(dpt_pts);
 }
 
 /**

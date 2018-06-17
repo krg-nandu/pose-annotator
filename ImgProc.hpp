@@ -349,6 +349,12 @@ struct vec3f
 		val[1] += b[1];
 		val[2] += b[2];
 	}
+    void operator -=(vec3f b)
+    {
+        val[0] -= b[0];
+        val[1] -= b[1];
+        val[2] -= b[2];
+    }
 	float normalize()
 	{
 		float n = norm();
