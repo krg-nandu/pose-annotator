@@ -18,6 +18,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->xpos->setRange(-25,25);
     ui->ypos->setRange(-25,25);
     ui->zpos->setRange(0,1000);
+
+    ui->yaw->setRange(0,360);
+    ui->pitch->setRange(0,360);
+    ui->roll->setRange(0,360);
 }
 
 MainWindow::~MainWindow()
@@ -119,6 +123,8 @@ void MainWindow::apply_current_pose_parameters()
     using namespace Ogre;
 
     this->monkeypose->monkey_node->setPosition(0,0,-1200-this->ui->zpos->value());
+
+    monkeypose->SetJointOrientation(1,ui->pitch->value(),ui->yaw->value(),ui->roll->value());
 
     /**
         This convoluted logic needs to be done because the monkey model has an
@@ -242,6 +248,21 @@ void MainWindow::on_ypos_sliderMoved(int position)
 }
 
 void MainWindow::on_zpos_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_yaw_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_pitch_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_roll_sliderMoved(int position)
 {
     update_views();
 }

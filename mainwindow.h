@@ -74,6 +74,12 @@ private slots:
 
     void on_zpos_sliderMoved(int position);
 
+    void on_yaw_sliderMoved(int position);
+
+    void on_pitch_sliderMoved(int position);
+
+    void on_roll_sliderMoved(int position);
+
 private:
     Ui::MainWindow *ui;
     void update_file_list();
