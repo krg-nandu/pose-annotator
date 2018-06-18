@@ -124,12 +124,8 @@ void MainWindow::get_side_view(cv::Mat& dst, const cv::Mat src, cv::Vec3b color,
     paint_on_image(dst, rot_pts, color);
 }
 
-void MainWindow::update_views(QString selectedFile)
+void MainWindow::update_views()
 {
-    // first read in the depth image
-    cv::Mat img = cv::imread(selectedFile.toUtf8().constData(),cv::IMREAD_ANYDEPTH);
-    // make a colorized version of the depthmap
-    cv::Mat depth_color = IMGShow::colormap(img, this->d1, this->d2);
 
     // apply the current pose parameters and get the rendered image
     apply_current_pose_parameters();
@@ -149,7 +145,7 @@ void MainWindow::update_views(QString selectedFile)
     // create an empty placeholder for the side view panel
     cv::Mat side_view(cv::Size(width, height), CV_8UC3, cv::Scalar(0,0,0));
     // paint depth points from both data and render
-    get_side_view(side_view, img, cv::Vec3b(128,128,128), 45);
+    get_side_view(side_view, depth_image, cv::Vec3b(128,128,128), 45);
     get_side_view(side_view, render_image_d, cv::Vec3b(0,128,0), 45);
 
     // update the view panel
@@ -200,7 +196,19 @@ void MainWindow::on_actionLoad_folder_triggered()
 
 void MainWindow::on_ui_file_list_itemDoubleClicked(QListWidgetItem *item)
 {
-    int curRow = this->ui->ui_file_list->currentRow();
+    curRow = this->ui->ui_file_list->currentRow();
     QString fullPath = this->listOfFiles[curRow].path + "/" + item->text();
-    update_views(fullPath);
+
+    // Read in the depth image
+    depth_image = cv::imread(selectedFile.toUtf8().constData(),cv::IMREAD_ANYDEPTH);
+    // make a colorized version of the depthmap
+    depth_color = IMGShow::colormap(depth_image, this->d1, this->d2);
+
+    // if this has been annotations, load in the pose
+    if (listOfFiles[curRow].isAnnotated) {
+        //TODO
+    }
+
+    // update the view panels
+    update_views();
 }

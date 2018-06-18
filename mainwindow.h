@@ -52,6 +52,9 @@ public:
     const int cx = width/2;
     const int cy = height/2;
     const float focal = 365.456;
+    cv::Mat depth_image;
+    cv::Mat depth_color;
+    int curRow;
 
     MonkeyPose_::MonkeyPose *monkeypose;
     vec3f uvdtoxyz(vec3f);
@@ -68,7 +71,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     void update_file_list();
-    void update_views(QString);
+    void update_views();
 };
 
 #endif // MAINWINDOW_H
