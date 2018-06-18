@@ -68,6 +68,12 @@ private slots:
     void on_ui_file_list_itemDoubleClicked(QListWidgetItem *item);
     void apply_current_pose_parameters();
 
+    void on_xpos_sliderMoved(int position);
+
+    void on_ypos_sliderMoved(int position);
+
+    void on_zpos_sliderMoved(int position);
+
 private:
     Ui::MainWindow *ui;
     void update_file_list();

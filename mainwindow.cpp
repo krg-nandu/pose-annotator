@@ -14,6 +14,10 @@ MainWindow::MainWindow(QWidget *parent) :
     monkeypose->monkey_renderer.mCamera->setNearClipDistance(d1);
     monkeypose->monkey_renderer.mCamera->setFarClipDistance(d2);
     monkeypose->monkey_node->setPosition(0,-200,-1200);
+
+    ui->xpos->setRange(-25,25);
+    ui->ypos->setRange(-25,25);
+    ui->zpos->setRange(0,1000);
 }
 
 MainWindow::~MainWindow()
@@ -112,6 +116,21 @@ void MainWindow::paint_on_image(cv::Mat& dst, std::vector<vec3f> pts, cv::Vec3b 
 
 void MainWindow::apply_current_pose_parameters()
 {
+    using namespace Ogre;
+
+    this->monkeypose->monkey_node->setPosition(0,0,-1200-this->ui->zpos->value());
+
+    /**
+        This convoluted logic needs to be done because the monkey model has an
+        extremely long pivot. This is for all practical purposes the controller bone.
+        To precisely want the monkey at a particular position, we need to set this bone
+        and then find out the offset to move the node
+    */
+    this->monkeypose->skeleton->getBone(0)->setPosition(this->ui->xpos->value(),this->ui->ypos->value(),0);
+    Vector3 pos = monkeypose->GetJointPosition(0);
+    Vector3 dpos = monkeypose->GetJointPosition(0) - monkeypose->GetJointPosition(1);
+    this->monkeypose->monkey_node->setPosition(dpos.x+pos.x,dpos.y+pos.y,dpos.z+pos.z);
+
     this->monkeypose->Render();
 }
 
@@ -126,14 +145,13 @@ void MainWindow::get_side_view(cv::Mat& dst, const cv::Mat src, cv::Vec3b color,
 
 void MainWindow::update_views()
 {
-
     // apply the current pose parameters and get the rendered image
     apply_current_pose_parameters();
 
     cv::Mat render_image = this->monkeypose->shortdepth;
     render_image = IMGShow::colormap(render_image, this->d1, this->d2, true);
 
-    cv::Mat overlap_view1 = 0.6*depth_color + 0.4*render_image;
+    cv::Mat overlap_view1 = 0.4*depth_color + 0.6*render_image;
     QImage qcolor((const unsigned char*)(overlap_view1.data), this->width, this->height, QImage::Format_RGB888);
     this->ui->view1->setPixmap(QPixmap::fromImage(qcolor));
 
@@ -200,7 +218,7 @@ void MainWindow::on_ui_file_list_itemDoubleClicked(QListWidgetItem *item)
     QString fullPath = this->listOfFiles[curRow].path + "/" + item->text();
 
     // Read in the depth image
-    depth_image = cv::imread(selectedFile.toUtf8().constData(),cv::IMREAD_ANYDEPTH);
+    depth_image = cv::imread(fullPath.toUtf8().constData(),cv::IMREAD_ANYDEPTH);
     // make a colorized version of the depthmap
     depth_color = IMGShow::colormap(depth_image, this->d1, this->d2);
 
@@ -210,5 +228,20 @@ void MainWindow::on_ui_file_list_itemDoubleClicked(QListWidgetItem *item)
     }
 
     // update the view panels
+    update_views();
+}
+
+void MainWindow::on_xpos_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_ypos_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_zpos_sliderMoved(int position)
+{
     update_views();
 }
