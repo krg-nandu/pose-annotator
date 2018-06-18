@@ -57,7 +57,8 @@ public:
     vec3f uvdtoxyz(vec3f);
     vec3f xyztouvd(vec3f);
     std::vector<vec3f> get_point_list(cv::Mat);
-    void paint_on_image(std::vector<vec3f>);
+    void paint_on_image(cv::Mat&, std::vector<vec3f>, cv::Vec3b);
+    void get_side_view(cv::Mat&, const cv::Mat, cv::Vec3b, float);
 
 private slots:
     void on_actionLoad_folder_triggered();
