@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QListWidget>
+#include <QDial>
 #include <opencv2/opencv.hpp>
 #include "Utility.h"
 #include "ImgProc.hpp"
@@ -44,6 +45,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     std::vector<FileItem> listOfFiles;
+    QVector<QDial*> dial_pose_controls;
+    std::vector<int> dial_jnt_num;
+    QVector<QSlider*> slider_pose_controls;
+    std::vector<int> slider_jnt_num;
 
     const int d1 = 100;
     const int d2 = 10000;
@@ -79,6 +84,36 @@ private slots:
     void on_pitch_sliderMoved(int position);
 
     void on_roll_sliderMoved(int position);
+
+    void on_abdomen_sliderMoved(int position);
+
+    void on_neck_sliderMoved(int position);
+
+    void on_head_sliderMoved(int position);
+
+    void on_l_collar_sliderMoved(int position);
+
+    void on_l_arm_sliderMoved(int position);
+
+    void on_l_hand_sliderMoved(int position);
+
+    void on_l_thigh_sliderMoved(int position);
+
+    void on_l_shin_sliderMoved(int position);
+
+    void on_l_foot_sliderMoved(int position);
+
+    void on_r_collar_sliderMoved(int position);
+
+    void on_r_arm_sliderMoved(int position);
+
+    void on_r_hand_sliderMoved(int position);
+
+    void on_r_thigh_sliderMoved(int position);
+
+    void on_r_shin_sliderMoved(int position);
+
+    void on_r_foot_sliderMoved(int position);
 
 private:
     Ui::MainWindow *ui;

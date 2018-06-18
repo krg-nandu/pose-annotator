@@ -22,7 +22,7 @@ static const uint qt_meta_data_MainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      24,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -39,6 +39,21 @@ static const uint qt_meta_data_MainWindow[] = {
      218,  134,   11,   11, 0x08,
      242,  134,   11,   11, 0x08,
      268,  134,   11,   11, 0x08,
+     293,  134,   11,   11, 0x08,
+     321,  134,   11,   11, 0x08,
+     346,  134,   11,   11, 0x08,
+     371,  134,   11,   11, 0x08,
+     400,  134,   11,   11, 0x08,
+     426,  134,   11,   11, 0x08,
+     453,  134,   11,   11, 0x08,
+     481,  134,   11,   11, 0x08,
+     508,  134,   11,   11, 0x08,
+     535,  134,   11,   11, 0x08,
+     564,  134,   11,   11, 0x08,
+     590,  134,   11,   11, 0x08,
+     617,  134,   11,   11, 0x08,
+     645,  134,   11,   11, 0x08,
+     672,  134,   11,   11, 0x08,
 
        0        // eod
 };
@@ -53,6 +68,21 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "on_yaw_sliderMoved(int)\0"
     "on_pitch_sliderMoved(int)\0"
     "on_roll_sliderMoved(int)\0"
+    "on_abdomen_sliderMoved(int)\0"
+    "on_neck_sliderMoved(int)\0"
+    "on_head_sliderMoved(int)\0"
+    "on_l_collar_sliderMoved(int)\0"
+    "on_l_arm_sliderMoved(int)\0"
+    "on_l_hand_sliderMoved(int)\0"
+    "on_l_thigh_sliderMoved(int)\0"
+    "on_l_shin_sliderMoved(int)\0"
+    "on_l_foot_sliderMoved(int)\0"
+    "on_r_collar_sliderMoved(int)\0"
+    "on_r_arm_sliderMoved(int)\0"
+    "on_r_hand_sliderMoved(int)\0"
+    "on_r_thigh_sliderMoved(int)\0"
+    "on_r_shin_sliderMoved(int)\0"
+    "on_r_foot_sliderMoved(int)\0"
 };
 
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -70,6 +100,21 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 6: _t->on_yaw_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 7: _t->on_pitch_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 8: _t->on_roll_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: _t->on_abdomen_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 10: _t->on_neck_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 11: _t->on_head_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 12: _t->on_l_collar_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 13: _t->on_l_arm_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->on_l_hand_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 15: _t->on_l_thigh_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 16: _t->on_l_shin_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 17: _t->on_l_foot_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 18: _t->on_r_collar_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 19: _t->on_r_arm_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 20: _t->on_r_hand_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 21: _t->on_r_thigh_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 22: _t->on_r_shin_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 23: _t->on_r_foot_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -107,9 +152,9 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 24)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 24;
     }
     return _id;
 }

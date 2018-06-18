@@ -22,6 +22,34 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->yaw->setRange(0,360);
     ui->pitch->setRange(0,360);
     ui->roll->setRange(0,360);
+
+    ui->abdomen->setRange(-15,10);
+    ui->neck->setRange(-15,15);
+    ui->head->setRange(-15,15);
+
+    // provide handles for the pose controls with joint indices to be modified in the Ogre model
+    dial_pose_controls.push_back(ui->abdomen); dial_jnt_num.push_back(57);
+    dial_pose_controls.push_back(ui->neck); dial_jnt_num.push_back(97);
+    dial_pose_controls.push_back(ui->head); dial_jnt_num.push_back(98);
+
+    // similarly for sliders
+    slider_pose_controls.push_back(ui->l_collar); slider_jnt_num.push_back(59);
+    slider_pose_controls.push_back(ui->l_arm); slider_jnt_num.push_back(60);
+    slider_pose_controls.push_back(ui->l_hand); slider_jnt_num.push_back(62);
+    slider_pose_controls.push_back(ui->l_thigh); slider_jnt_num.push_back(38);
+    slider_pose_controls.push_back(ui->l_shin); slider_jnt_num.push_back(39);
+    slider_pose_controls.push_back(ui->l_foot); slider_jnt_num.push_back(21);
+
+    slider_pose_controls.push_back(ui->r_collar); slider_jnt_num.push_back(78);
+    slider_pose_controls.push_back(ui->r_arm); slider_jnt_num.push_back(79);
+    slider_pose_controls.push_back(ui->r_hand); slider_jnt_num.push_back(81);
+    slider_pose_controls.push_back(ui->r_thigh); slider_jnt_num.push_back(19);
+    slider_pose_controls.push_back(ui->r_shin); slider_jnt_num.push_back(20);
+    slider_pose_controls.push_back(ui->r_foot); slider_jnt_num.push_back(40);
+
+    for (int j=0; j < slider_jnt_num.size(); ++j){
+        slider_pose_controls[j]->setRange(-50,50);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -100,11 +128,6 @@ inline std::vector<vec3f> rotate_points(std::vector<vec3f> pts, vec3f mu, float 
         v.y = pt.y;
         v.z = -pt.x * sind(angle) + pt.z * cosd(angle);
         v += mu;
-
-//        v.x = pt.x * cosd(angle) + pt.z * sind(angle) + mu.x;
-//        v.z = pt.y + mu.y;
-//        v.y = -pt.x * sind(angle) + pt.z * cosd(angle) + mu.z;
-        //qDebug() << v.x << " " << v.y << " " << v.z;
         rotated_pts.push_back(v);
     }
     return rotated_pts;
@@ -121,8 +144,15 @@ void MainWindow::paint_on_image(cv::Mat& dst, std::vector<vec3f> pts, cv::Vec3b 
 void MainWindow::apply_current_pose_parameters()
 {
     using namespace Ogre;
-
     this->monkeypose->monkey_node->setPosition(0,0,-1200-this->ui->zpos->value());
+
+    for (int j = 0; j < dial_jnt_num.size(); ++j){
+        monkeypose->SetJointOrientation(dial_jnt_num[j],dial_pose_controls[j]->value(),0,0);
+    }
+
+    for (int j = 0; j < slider_jnt_num.size(); ++j){
+        monkeypose->SetJointOrientation(slider_jnt_num[j],slider_pose_controls[j]->value(),0,0);
+    }
 
     monkeypose->SetJointOrientation(1,ui->pitch->value(),ui->yaw->value(),ui->roll->value());
 
@@ -263,6 +293,81 @@ void MainWindow::on_pitch_sliderMoved(int position)
 }
 
 void MainWindow::on_roll_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_abdomen_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_neck_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_head_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_l_collar_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_l_arm_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_l_hand_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_l_thigh_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_l_shin_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_l_foot_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_r_collar_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_r_arm_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_r_hand_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_r_thigh_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_r_shin_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_r_foot_sliderMoved(int position)
 {
     update_views();
 }
