@@ -103,14 +103,25 @@ vec3f MainWindow::uvdtoxyz(vec3f uvd){
     return xyz;
 }
 
-std::vector<vec3f> MainWindow::get_point_list(cv::Mat img)
+std::vector<vec3f> MainWindow::get_point_list(cv::Mat img, vec3f mu)
 {
+    vec3f uvd_mu = xyztouvd(mu);
     std::vector<vec3f> dpt_pts;
-    for (int r = 0; r < img.rows; r++){
-        for (int c = 0; c < img.cols; c++){
+
+    int x_start = std::max(0,int(uvd_mu.x)-200);
+    int x_end = std::min(int(uvd_mu.x)+200,img.rows);
+    int y_start = std::max(0,int(uvd_mu.y)-200);
+    int y_end = std::min(int(uvd_mu.y)+200,img.cols);
+    int z_start = uvd_mu.z - 500;
+    int z_end = uvd_mu.z + 500;
+
+    for (int r = x_start; r < x_end; r++){
+        for (int c = y_start; c < y_end; c++){
             vec3f v = MainWindow::uvdtoxyz(vec3f(r,c,img.at<u_int16_t>(r,c)));
-            if (abs(v.z) > 9000)
+            int d = abs(v.z);
+            if ((d < z_start) || (d > z_end)){
                 continue;
+            }
             dpt_pts.push_back(v);
         }
     }
@@ -172,9 +183,9 @@ void MainWindow::apply_current_pose_parameters()
 
 void MainWindow::get_side_view(cv::Mat& dst, const cv::Mat src, cv::Vec3b color, float angle)
 {
-    std::vector<vec3f> dpt_pts = get_point_list(src);
     Ogre::Vector3 root = this->monkeypose->GetJointPosition(1);
     vec3f mu(root.x,root.y,root.z);
+    std::vector<vec3f> dpt_pts = get_point_list(src,mu);
     std::vector<vec3f> rot_pts = rotate_points(dpt_pts,mu,angle);
     paint_on_image(dst, rot_pts, color);
 }
