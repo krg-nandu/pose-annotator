@@ -786,69 +786,57 @@
       <string>Next</string>
      </property>
     </widget>
-    <widget class="QLabel" name="scale_label">
+    <widget class="QGroupBox" name="groupBox">
      <property name="geometry">
       <rect>
        <x>330</x>
        <y>280</y>
-       <width>67</width>
-       <height>17</height>
+       <width>311</width>
+       <height>51</height>
       </rect>
      </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
+     <property name="title">
+      <string>Sideview viewing angle</string>
      </property>
-     <property name="text">
+     <widget class="QSlider" name="vangle">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>27</y>
+        <width>291</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>330</y>
+       <width>311</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="title">
       <string>Scale</string>
      </property>
-    </widget>
-    <widget class="QSlider" name="scale">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>280</y>
-       <width>261</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-    <widget class="QSlider" name="vangle">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>310</y>
-       <width>261</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="vangle_label">
-     <property name="geometry">
-      <rect>
-       <x>330</x>
-       <y>310</y>
-       <width>67</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>View</string>
-     </property>
+     <widget class="QSlider" name="scale">
+      <property name="geometry">
+       <rect>
+        <x>11</x>
+        <y>28</y>
+        <width>291</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QListWidget" name="ui_file_list">

@@ -15,6 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :
     monkeypose->monkey_renderer.mCamera->setFarClipDistance(d2);
     monkeypose->monkey_node->setPosition(0,-200,-1200);
 
+    ui->vangle->setRange(0,360);
+    ui->scale->setRange(75,125);
+
     ui->xpos->setRange(-25,25);
     ui->ypos->setRange(-25,25);
     ui->zpos->setRange(0,1000);
@@ -138,7 +141,8 @@ inline std::vector<vec3f> rotate_points(std::vector<vec3f> pts, vec3f mu, float 
         v.x = pt.x * cosd(angle) + pt.z * sind(angle);
         v.y = pt.y;
         v.z = -pt.x * sind(angle) + pt.z * cosd(angle);
-        v += mu;
+        //v += mu;
+        v.z -= 2000;
         rotated_pts.push_back(v);
     }
     return rotated_pts;
@@ -156,6 +160,8 @@ void MainWindow::apply_current_pose_parameters()
 {
     using namespace Ogre;
     this->monkeypose->monkey_node->setPosition(0,0,-1200-this->ui->zpos->value());
+    float scale = this->ui->scale->value()/100.;
+    this->monkeypose->monkey_node->setScale(this->monkeypose->orgscale * scale);
 
     for (int j = 0; j < dial_jnt_num.size(); ++j){
         monkeypose->SetJointOrientation(dial_jnt_num[j],dial_pose_controls[j]->value(),0,0);
@@ -210,8 +216,8 @@ void MainWindow::update_views()
     // create an empty placeholder for the side view panel
     cv::Mat side_view(cv::Size(width, height), CV_8UC3, cv::Scalar(0,0,0));
     // paint depth points from both data and render
-    get_side_view(side_view, depth_image, cv::Vec3b(128,128,128), 45);
-    get_side_view(side_view, render_image_d, cv::Vec3b(0,128,0), 45);
+    get_side_view(side_view, depth_image, cv::Vec3b(128,128,128), ui->vangle->value());
+    get_side_view(side_view, render_image_d, cv::Vec3b(0,128,0), ui->vangle->value());
 
     // update the view panel
     QImage qsidecolor((const unsigned char*)(side_view.data), this->width, this->height, QImage::Format_RGB888);
@@ -379,6 +385,16 @@ void MainWindow::on_r_shin_sliderMoved(int position)
 }
 
 void MainWindow::on_r_foot_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_vangle_sliderMoved(int position)
+{
+    update_views();
+}
+
+void MainWindow::on_scale_sliderMoved(int position)
 {
     update_views();
 }
