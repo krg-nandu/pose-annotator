@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->vangle->setRange(0,360);
     ui->scale->setRange(75,125);
+    ui->scale->setValue(100); // this is to set the initial value
 
     ui->xpos->setRange(-25,25);
     ui->ypos->setRange(-25,25);
@@ -53,6 +54,10 @@ MainWindow::MainWindow(QWidget *parent) :
     for (int j=0; j < slider_jnt_num.size(); ++j){
         slider_pose_controls[j]->setRange(-50,50);
     }
+
+    int tmp[23] = {100, 97, 57, 60, 79, 61, 80, 62, 81, 69, 91, 71, 93, 38, 19, 39, 20, 40, 21, 41, 22, 50, 31};
+    for (int i = 0; i < sizeof(tmp)/sizeof(int); ++i)
+        jnts_to_display.push_back(tmp[i]);
 }
 
 MainWindow::~MainWindow()
@@ -150,16 +155,10 @@ inline std::vector<vec3f> rotate_points(std::vector<vec3f> pts, vec3f mu, float 
     return rotated_pts;
 }
 
-void MainWindow::paint_on_image(cv::Mat& dst, std::vector<vec3f> pts, vec3f mu, cv::Vec3b color)
+void MainWindow::paint_on_image(cv::Mat& dst, std::vector<vec3f> pts, cv::Vec3b color)
 {
-    vec3f _mu = xyztouvd(mu);
-    //qDebug() << this->cx << " " << _mu.x << " " << _mu.y << " " << _mu.z;
-    int offX = (this->cx - _mu.y);
-    int offY = (this->cy - _mu.x);
-
     for (auto pt : pts){
         vec3f v = xyztouvd(pt);
-        //dst.at<cv::Vec3b>(int(v.x)+offX,int(v.y)+offY) = color;
         dst.at<cv::Vec3b>(int(v.x),int(v.y)) = color;
     }
 }
@@ -201,15 +200,17 @@ void MainWindow::get_side_view(cv::Mat& dst, const cv::Mat src, cv::Vec3b color,
     vec3f mu(root.x,root.y,root.z);
     std::vector<vec3f> dpt_pts = get_point_list(src,mu);
     std::vector<vec3f> rot_pts = rotate_points(dpt_pts,mu,angle);
-    paint_on_image(dst, rot_pts, mu, color);
+    paint_on_image(dst, rot_pts, color);
 }
 
 void MainWindow::draw_skeleton(cv::Mat& dst)
 {
     using namespace Ogre;
-    Vector3 v = this->monkeypose->GetJointPosition(1);
-    vec3f _v = xyztouvd(vec3f(v.x,v.y,v.z));
-    cv::circle(dst, cvPoint2D32f(_v.y,_v.x), 2, cv::Scalar(255,0,0));
+    for (auto jnt : jnts_to_display){
+        Vector3 v = this->monkeypose->GetJointPosition(jnt);
+        vec3f _v = xyztouvd(vec3f(v.x,v.y,v.z));
+        cv::circle(dst, cvPoint2D32f(_v.y,_v.x), 2, cv::Scalar(255,0,0));
+    }
 }
 
 void MainWindow::update_views()

@@ -50,6 +50,7 @@ public:
     std::vector<int> dial_jnt_num;
     QVector<QSlider*> slider_pose_controls;
     std::vector<int> slider_jnt_num;
+    std::vector<int> jnts_to_display;
 
     const int d1 = 100;
     const int d2 = 10000;
@@ -66,7 +67,7 @@ public:
     vec3f uvdtoxyz(vec3f);
     vec3f xyztouvd(vec3f);
     std::vector<vec3f> get_point_list(cv::Mat,vec3f);
-    void paint_on_image(cv::Mat&, std::vector<vec3f>, vec3f, cv::Vec3b);
+    void paint_on_image(cv::Mat&, std::vector<vec3f>, cv::Vec3b);
     void get_side_view(cv::Mat&, const cv::Mat, cv::Vec3b, float);
     void draw_skeleton(cv::Mat&);
 
