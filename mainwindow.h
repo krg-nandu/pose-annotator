@@ -66,8 +66,9 @@ public:
     vec3f uvdtoxyz(vec3f);
     vec3f xyztouvd(vec3f);
     std::vector<vec3f> get_point_list(cv::Mat,vec3f);
-    void paint_on_image(cv::Mat&, std::vector<vec3f>, cv::Vec3b);
+    void paint_on_image(cv::Mat&, std::vector<vec3f>, vec3f, cv::Vec3b);
     void get_side_view(cv::Mat&, const cv::Mat, cv::Vec3b, float);
+    void draw_skeleton(cv::Mat&);
 
 private slots:
     void on_actionLoad_folder_triggered();
@@ -75,49 +76,27 @@ private slots:
     void apply_current_pose_parameters();
 
     void on_xpos_sliderMoved(int position);
-
     void on_ypos_sliderMoved(int position);
-
     void on_zpos_sliderMoved(int position);
-
     void on_yaw_sliderMoved(int position);
-
     void on_pitch_sliderMoved(int position);
-
     void on_roll_sliderMoved(int position);
-
     void on_abdomen_sliderMoved(int position);
-
     void on_neck_sliderMoved(int position);
-
     void on_head_sliderMoved(int position);
-
     void on_l_collar_sliderMoved(int position);
-
     void on_l_arm_sliderMoved(int position);
-
     void on_l_hand_sliderMoved(int position);
-
     void on_l_thigh_sliderMoved(int position);
-
     void on_l_shin_sliderMoved(int position);
-
     void on_l_foot_sliderMoved(int position);
-
     void on_r_collar_sliderMoved(int position);
-
     void on_r_arm_sliderMoved(int position);
-
     void on_r_hand_sliderMoved(int position);
-
     void on_r_thigh_sliderMoved(int position);
-
     void on_r_shin_sliderMoved(int position);
-
     void on_r_foot_sliderMoved(int position);
-
     void on_vangle_sliderMoved(int position);
-
     void on_scale_sliderMoved(int position);
 
 private:

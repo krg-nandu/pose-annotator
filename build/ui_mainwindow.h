@@ -122,6 +122,7 @@ public:
         view2 = new QLabel(pcloud);
         view2->setObjectName(QString::fromUtf8("view2"));
         view2->setGeometry(QRect(540, 30, 512, 424));
+        view2->setMouseTracking(true);
         panel = new QGroupBox(centralWidget);
         panel->setObjectName(QString::fromUtf8("panel"));
         panel->setGeometry(QRect(430, 470, 651, 461));

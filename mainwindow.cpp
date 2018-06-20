@@ -87,8 +87,8 @@ inline void get_file_list(MainWindow * w, QString path)
  */
 vec3f MainWindow::xyztouvd(vec3f xyz) {
     vec3f uvd;
-    uvd.y = xyz.x/xyz.z * focal + cx;
-    uvd.x = -xyz.y/xyz.z * focal + cy;
+    uvd.y = xyz.x/xyz.z * (-focal) + cx;
+    uvd.x = -xyz.y/xyz.z * (-focal) + cy;
     uvd.z = -xyz.z;
     return uvd;
 }
@@ -100,8 +100,8 @@ vec3f MainWindow::xyztouvd(vec3f xyz) {
  */
 vec3f MainWindow::uvdtoxyz(vec3f uvd){
     vec3f xyz;
-    xyz.x = ((cx - uvd.y) / focal) * uvd.z;
-    xyz.y = ((uvd.x - cy) / focal) * uvd.z;
+    xyz.x = ((cx - uvd.y) / (-focal)) * uvd.z;
+    xyz.y = ((uvd.x - cy) / (-focal)) * uvd.z;
     xyz.z = -uvd.z;
     return xyz;
 }
@@ -111,12 +111,14 @@ std::vector<vec3f> MainWindow::get_point_list(cv::Mat img, vec3f mu)
     vec3f uvd_mu = xyztouvd(mu);
     std::vector<vec3f> dpt_pts;
 
-    int x_start = std::max(0,int(uvd_mu.x)-200);
-    int x_end = std::min(int(uvd_mu.x)+200,img.rows);
-    int y_start = std::max(0,int(uvd_mu.y)-200);
-    int y_end = std::min(int(uvd_mu.y)+200,img.cols);
+    qDebug() << "rows: " << img.rows << " " << uvd_mu.x << " cols:" << img.cols << " " << uvd_mu.y;
+    int x_start = std::max(0,int(uvd_mu.x)-100);
+    int x_end = std::min(int(uvd_mu.x)+100,img.rows);
+    int y_start = std::max(0,int(uvd_mu.y)-100);
+    int y_end = std::min(int(uvd_mu.y)+100,img.cols);
     int z_start = uvd_mu.z - 500;
     int z_end = uvd_mu.z + 500;
+    qDebug() << "x: " << x_start << " " << x_end << " y:" << y_start << " " << y_end;
 
     for (int r = x_start; r < x_end; r++){
         for (int c = y_start; c < y_end; c++){
@@ -142,16 +144,22 @@ inline std::vector<vec3f> rotate_points(std::vector<vec3f> pts, vec3f mu, float 
         v.y = pt.y;
         v.z = -pt.x * sind(angle) + pt.z * cosd(angle);
         //v += mu;
-        v.z -= 2000;
+        v.z -= 1500;
         rotated_pts.push_back(v);
     }
     return rotated_pts;
 }
 
-void MainWindow::paint_on_image(cv::Mat& dst, std::vector<vec3f> pts, cv::Vec3b color)
+void MainWindow::paint_on_image(cv::Mat& dst, std::vector<vec3f> pts, vec3f mu, cv::Vec3b color)
 {
+    vec3f _mu = xyztouvd(mu);
+    //qDebug() << this->cx << " " << _mu.x << " " << _mu.y << " " << _mu.z;
+    int offX = (this->cx - _mu.y);
+    int offY = (this->cy - _mu.x);
+
     for (auto pt : pts){
         vec3f v = xyztouvd(pt);
+        //dst.at<cv::Vec3b>(int(v.x)+offX,int(v.y)+offY) = color;
         dst.at<cv::Vec3b>(int(v.x),int(v.y)) = color;
     }
 }
@@ -193,18 +201,28 @@ void MainWindow::get_side_view(cv::Mat& dst, const cv::Mat src, cv::Vec3b color,
     vec3f mu(root.x,root.y,root.z);
     std::vector<vec3f> dpt_pts = get_point_list(src,mu);
     std::vector<vec3f> rot_pts = rotate_points(dpt_pts,mu,angle);
-    paint_on_image(dst, rot_pts, color);
+    paint_on_image(dst, rot_pts, mu, color);
+}
+
+void MainWindow::draw_skeleton(cv::Mat& dst)
+{
+    using namespace Ogre;
+    Vector3 v = this->monkeypose->GetJointPosition(1);
+    vec3f _v = xyztouvd(vec3f(v.x,v.y,v.z));
+    cv::circle(dst, cvPoint2D32f(_v.y,_v.x), 2, cv::Scalar(255,0,0));
 }
 
 void MainWindow::update_views()
 {
     // apply the current pose parameters and get the rendered image
     apply_current_pose_parameters();
+    this->monkeypose->Render();
 
     cv::Mat render_image = this->monkeypose->shortdepth;
     render_image = IMGShow::colormap(render_image, this->d1, this->d2, true);
 
     cv::Mat overlap_view1 = 0.4*depth_color + 0.6*render_image;
+    draw_skeleton(overlap_view1);
     QImage qcolor((const unsigned char*)(overlap_view1.data), this->width, this->height, QImage::Format_RGB888);
     this->ui->view1->setPixmap(QPixmap::fromImage(qcolor));
 
@@ -398,3 +416,4 @@ void MainWindow::on_scale_sliderMoved(int position)
 {
     update_views();
 }
+
