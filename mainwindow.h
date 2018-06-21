@@ -50,10 +50,10 @@ public:
     std::vector<int> dial_jnt_num;
     QVector<QSlider*> slider_pose_controls;
     std::vector<int> slider_jnt_num;
-    std::vector<int> jnts_to_display;
+    std::vector<std::vector<int>> jnts_to_display;
 
     const int d1 = 100;
-    const int d2 = 10000;
+    const int d2 = 4000;
     const int width = 512;
     const int height = 424;
     const int cx = width/2;

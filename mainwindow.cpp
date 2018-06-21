@@ -55,9 +55,20 @@ MainWindow::MainWindow(QWidget *parent) :
         slider_pose_controls[j]->setRange(-50,50);
     }
 
-    int tmp[23] = {100, 97, 57, 60, 79, 61, 80, 62, 81, 69, 91, 71, 93, 38, 19, 39, 20, 40, 21, 41, 22, 50, 31};
-    for (int i = 0; i < sizeof(tmp)/sizeof(int); ++i)
-        jnts_to_display.push_back(tmp[i]);
+    jnts_to_display.push_back(std::vector<int>());
+    jnts_to_display[0].push_back(97); jnts_to_display[0].push_back(60); jnts_to_display[0].push_back(61); jnts_to_display[0].push_back(62); jnts_to_display[0].push_back(69); jnts_to_display[0].push_back(71);
+
+    jnts_to_display.push_back(std::vector<int>());
+    jnts_to_display[1].push_back(97); jnts_to_display[1].push_back(79); jnts_to_display[1].push_back(80); jnts_to_display[1].push_back(81); jnts_to_display[1].push_back(91); jnts_to_display[1].push_back(93);
+
+    jnts_to_display.push_back(std::vector<int>());
+    jnts_to_display[2].push_back(57); jnts_to_display[2].push_back(38); jnts_to_display[2].push_back(39); jnts_to_display[2].push_back(40); jnts_to_display[2].push_back(41); jnts_to_display[2].push_back(50);
+
+    jnts_to_display.push_back(std::vector<int>());
+    jnts_to_display[3].push_back(57); jnts_to_display[3].push_back(19); jnts_to_display[3].push_back(20); jnts_to_display[3].push_back(21); jnts_to_display[3].push_back(22); jnts_to_display[3].push_back(31);
+
+    jnts_to_display.push_back(std::vector<int>());
+    jnts_to_display[4].push_back(100); jnts_to_display[4].push_back(97); jnts_to_display[4].push_back(57);
 }
 
 MainWindow::~MainWindow()
@@ -204,14 +215,17 @@ void MainWindow::get_side_view(cv::Mat& dst, const cv::Mat src, cv::Vec3b color,
 void MainWindow::draw_skeleton(cv::Mat& dst)
 {
     using namespace Ogre;
-    for (int jnt =0; jnt < jnts_to_display.size(); ++jnt){
-        Vector3 v = this->monkeypose->GetJointPosition(jnts_to_display[jnt]);
-        vec3f _v = xyztouvd(vec3f(v.x,v.y,v.z));
-        cv::circle(dst, cvPoint2D32f(_v.y,_v.x), 3, cv::Scalar(255,0,0));
-        if (jnt > 0){
-            Vector3 v0 = this->monkeypose->GetJointPosition(jnts_to_display[jnt-1]);
-            vec3f _v0 = xyztouvd(vec3f(v0.x,v0.y,v0.z));
-            cv::line(dst,cvPoint2D32f(_v.y,_v.x),cvPoint2D32f(_v0.y,_v0.x),cv::Scalar(0,0,255),2);
+
+    for (int chain = 0; chain < jnts_to_display.size(); chain++){
+        vec3f _prev;
+        for (int jnt = 0; jnt < jnts_to_display[chain].size(); ++jnt){
+            Vector3 v = this->monkeypose->GetJointPosition(jnts_to_display[chain][jnt]);
+            vec3f _v = xyztouvd(vec3f(v.x,v.y,v.z));
+            cv::circle(dst, cvPoint2D32f(_v.y,_v.x), 3, cv::Scalar(255,0,0));
+            if (jnt > 0){
+                cv::line(dst,cvPoint2D32f(_v.y,_v.x),cvPoint2D32f(_prev.y,_prev.x),cv::Scalar(0,0,255),2);
+            }
+            _prev = _v;
         }
     }
 }
@@ -222,21 +236,21 @@ void MainWindow::update_views()
     apply_current_pose_parameters();
     this->monkeypose->Render();
 
-    cv::Mat render_image = this->monkeypose->shortdepth;
-    render_image = IMGShow::colormap(render_image, this->d1, this->d2, true);
-
-    //cv::Mat overlap_view1 = 0.4*depth_color + 0.6*render_image;
-    cv::Mat overlap_view1;
-    cv::addWeighted(render_image,0.3,this->depth_color,0.7,0.0,overlap_view1);
-
-    draw_skeleton(overlap_view1);
-    QImage qcolor((const unsigned char*)(overlap_view1.data), this->width, this->height, QImage::Format_RGB888);
-    this->ui->view1->setPixmap(QPixmap::fromImage(qcolor));
-
     IMGT<float> depthKN;
     depthKN.Create(cvSize(monkeypose->depth->width,monkeypose->depth->height),16,1);
     ImgProcDepth::CvtDepthGL2KN(monkeypose->depth,depthKN,d1,d2,focal);
     cv::Mat render_image_d = depthKN.img;
+
+    //cv::Mat render_image = this->monkeypose->shortdepth;
+    cv::Mat render_image = IMGShow::colormap(render_image_d, this->d1, this->d2, true);
+
+    //cv::Mat overlap_view1 = 0.4*depth_color + 0.6*render_image;
+    cv::Mat overlap_view1;
+    cv::addWeighted(render_image,0.5,this->depth_color,0.5,0.0,overlap_view1);
+
+    draw_skeleton(overlap_view1);
+    QImage qcolor((const unsigned char*)(overlap_view1.data), this->width, this->height, QImage::Format_RGB888);
+    this->ui->view1->setPixmap(QPixmap::fromImage(qcolor));
 
     // create an empty placeholder for the side view panel
     cv::Mat side_view(cv::Size(width, height), CV_8UC3, cv::Scalar(0,0,0));
@@ -298,7 +312,7 @@ void MainWindow::on_ui_file_list_itemDoubleClicked(QListWidgetItem *item)
     // Read in the depth image
     depth_image = cv::imread(fullPath.toUtf8().constData(),cv::IMREAD_ANYDEPTH);
     // make a colorized version of the depthmap
-    depth_color = IMGShow::colormap(depth_image, this->d1, this->d2);
+    depth_color = IMGShow::colormap(depth_image, this->d1, this->d2,true);
 
     // if this has been annotations, load in the pose
     if (listOfFiles[curRow].isAnnotated) {
