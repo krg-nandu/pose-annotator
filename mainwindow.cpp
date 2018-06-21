@@ -116,14 +116,12 @@ std::vector<vec3f> MainWindow::get_point_list(cv::Mat img, vec3f mu)
     vec3f uvd_mu = xyztouvd(mu);
     std::vector<vec3f> dpt_pts;
 
-    qDebug() << "rows: " << img.rows << " " << uvd_mu.x << " cols:" << img.cols << " " << uvd_mu.y;
-    int x_start = std::max(0,int(uvd_mu.x)-100);
-    int x_end = std::min(int(uvd_mu.x)+100,img.rows);
-    int y_start = std::max(0,int(uvd_mu.y)-100);
-    int y_end = std::min(int(uvd_mu.y)+100,img.cols);
+    int x_start = std::max(0,int(uvd_mu.x)-150);
+    int x_end = std::min(int(uvd_mu.x)+150,img.rows);
+    int y_start = std::max(0,int(uvd_mu.y)-150);
+    int y_end = std::min(int(uvd_mu.y)+150,img.cols);
     int z_start = uvd_mu.z - 500;
     int z_end = uvd_mu.z + 500;
-    qDebug() << "x: " << x_start << " " << x_end << " y:" << y_start << " " << y_end;
 
     for (int r = x_start; r < x_end; r++){
         for (int c = y_start; c < y_end; c++){
@@ -148,7 +146,6 @@ inline std::vector<vec3f> rotate_points(std::vector<vec3f> pts, vec3f mu, float 
         v.x = pt.x * cosd(angle) + pt.z * sind(angle);
         v.y = pt.y;
         v.z = -pt.x * sind(angle) + pt.z * cosd(angle);
-        //v += mu;
         v.z -= 1500;
         rotated_pts.push_back(v);
     }
@@ -196,7 +193,8 @@ void MainWindow::apply_current_pose_parameters()
 
 void MainWindow::get_side_view(cv::Mat& dst, const cv::Mat src, cv::Vec3b color, float angle)
 {
-    Ogre::Vector3 root = this->monkeypose->GetJointPosition(1);
+    // get the location of the chest
+    Ogre::Vector3 root = this->monkeypose->GetJointPosition(58);
     vec3f mu(root.x,root.y,root.z);
     std::vector<vec3f> dpt_pts = get_point_list(src,mu);
     std::vector<vec3f> rot_pts = rotate_points(dpt_pts,mu,angle);
@@ -206,10 +204,15 @@ void MainWindow::get_side_view(cv::Mat& dst, const cv::Mat src, cv::Vec3b color,
 void MainWindow::draw_skeleton(cv::Mat& dst)
 {
     using namespace Ogre;
-    for (auto jnt : jnts_to_display){
-        Vector3 v = this->monkeypose->GetJointPosition(jnt);
+    for (int jnt =0; jnt < jnts_to_display.size(); ++jnt){
+        Vector3 v = this->monkeypose->GetJointPosition(jnts_to_display[jnt]);
         vec3f _v = xyztouvd(vec3f(v.x,v.y,v.z));
-        cv::circle(dst, cvPoint2D32f(_v.y,_v.x), 2, cv::Scalar(255,0,0));
+        cv::circle(dst, cvPoint2D32f(_v.y,_v.x), 3, cv::Scalar(255,0,0));
+        if (jnt > 0){
+            Vector3 v0 = this->monkeypose->GetJointPosition(jnts_to_display[jnt-1]);
+            vec3f _v0 = xyztouvd(vec3f(v0.x,v0.y,v0.z));
+            cv::line(dst,cvPoint2D32f(_v.y,_v.x),cvPoint2D32f(_v0.y,_v0.x),cv::Scalar(0,0,255),2);
+        }
     }
 }
 
@@ -222,7 +225,10 @@ void MainWindow::update_views()
     cv::Mat render_image = this->monkeypose->shortdepth;
     render_image = IMGShow::colormap(render_image, this->d1, this->d2, true);
 
-    cv::Mat overlap_view1 = 0.4*depth_color + 0.6*render_image;
+    //cv::Mat overlap_view1 = 0.4*depth_color + 0.6*render_image;
+    cv::Mat overlap_view1;
+    cv::addWeighted(render_image,0.3,this->depth_color,0.7,0.0,overlap_view1);
+
     draw_skeleton(overlap_view1);
     QImage qcolor((const unsigned char*)(overlap_view1.data), this->width, this->height, QImage::Format_RGB888);
     this->ui->view1->setPixmap(QPixmap::fromImage(qcolor));
