@@ -281,6 +281,17 @@ void MainWindow::update_file_list()
     }
 }
 
+void MainWindow::refresh_file_list()
+{
+    int row = 0;
+    for (auto a : this->listOfFiles) {
+        if (a.isAnnotated) {
+            MainWindow::ui->ui_file_list->item(row)->setForeground(Qt::green);
+        }
+        row++;
+    }
+}
+
 /**
  * @brief MainWindow::on_actionLoad_folder_triggered
  * Open a file browser and select the folder containing the images to be annotated
@@ -443,3 +454,35 @@ void MainWindow::on_scale_sliderMoved(int position)
     update_views();
 }
 
+
+void MainWindow::on_button_save_clicked()
+{
+    using namespace Ogre;
+    // get all the parameter values and store them to a file
+    // also, get the 3D joint locations and store them in a separate label file
+    QString path = this->listOfFiles[curRow].path;
+    QString name = this->ui->ui_file_list->item(curRow)->text();
+    name.replace(".png","_params.txt");
+    QString label_file_name = path + "/" + name;
+
+    std::ofstream label_file;
+    label_file.open(label_file_name.toUtf8().constData());
+
+    float x = this->ui->xpos->value(), y = this->ui->ypos->value(), z = this->ui->zpos->value();
+    float scale = this->ui->scale->value()/100.;
+    float pitch = ui->pitch->value(), yaw = ui->yaw->value(), roll = ui->roll->value();
+    label_file << x << " " << y << " " << z << " " << pitch << " " << yaw << " " << roll << " " << scale;
+
+    for (int j = 0; j < dial_jnt_num.size(); ++j){
+        label_file << " " << dial_pose_controls[j]->value();
+    }
+
+    for (int j = 0; j < slider_jnt_num.size(); ++j){
+        label_file << " " << slider_pose_controls[j]->value();
+    }
+    label_file.close();
+
+    // set annotation label
+    this->listOfFiles[curRow].isAnnotated = true;
+    refresh_file_list();
+}

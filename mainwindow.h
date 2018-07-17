@@ -13,6 +13,7 @@
 #include "ImgProc.hpp"
 #include "MonkeyPose.h"
 #include <algorithm>
+#include <fstream>
 
 struct FileItem {
     QString path;
@@ -24,7 +25,7 @@ struct FileItem {
         path = dir;
         fileName = name;
         // compute the boolean value
-        QFileInfo check_file(path+'/'+name.replace(".png",".txt"));
+        QFileInfo check_file(path+'/'+name.replace(".png","_params.txt"));
         // check if file exists and if yes: Is it really a file and no directory?
         if (check_file.exists() && check_file.isFile()) {
             isAnnotated = true;
@@ -102,10 +103,13 @@ private slots:
     void on_view1_mouseMoveEvent();
 
 
+    void on_button_save_clicked();
+
 private:
     Ui::MainWindow *ui;
     void update_file_list();
     void update_views();
+    void refresh_file_list();
 };
 
 #endif // MAINWINDOW_H
