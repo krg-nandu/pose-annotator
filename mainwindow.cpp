@@ -167,6 +167,9 @@ void MainWindow::paint_on_image(cv::Mat& dst, std::vector<vec3f> pts, cv::Vec3b 
 {
     for (auto pt : pts){
         vec3f v = xyztouvd(pt);
+        if ((int(v.x) < 0) || (int(v.x) >= dst.rows) || (int(v.y) < 0) || (int(v.y) >= dst.cols)){
+            continue;
+        }
         dst.at<cv::Vec3b>(int(v.x),int(v.y)) = color;
     }
 }
@@ -320,6 +323,35 @@ void MainWindow::on_actionLoad_folder_triggered()
     get_file_list(this,folderName.at(0));
     update_file_list();
 }
+void MainWindow::load_annotation(QString path)
+{
+    // open the label file
+    std::ifstream label_file;
+    label_file.open(path.replace(".png","_params.txt").toUtf8().constData());
+
+    // read in the parameter values
+    float x, y, z, yaw, pitch, roll, scale;
+    label_file >> x >> y >> z >> pitch >> yaw >> roll >> scale;
+    ui->xpos->setValue(x);
+    ui->ypos->setValue(y);
+    ui->zpos->setValue(z);
+    ui->pitch->setValue(pitch);
+    ui->yaw->setValue(yaw);
+    ui->roll->setValue(roll);
+    ui->scale->setValue(scale*100);
+
+    float angle;
+    for (int j = 0; j < dial_jnt_num.size(); ++j){
+        label_file >> angle;
+        dial_pose_controls[j]->setValue(angle);
+    }
+
+    for (int j = 0; j < slider_jnt_num.size(); ++j){
+        label_file >> angle;
+        slider_pose_controls[j]->setValue(angle);
+    }
+    label_file.close();
+}
 
 void MainWindow::simulate_itemDoubleClicked()
 {
@@ -333,7 +365,7 @@ void MainWindow::simulate_itemDoubleClicked()
     depth_color = IMGShow::colormap(depth_image, this->d1, this->d2,true);
     // if this has been annotations, load in the pose
     if (listOfFiles[curRow].isAnnotated) {
-        //TODO
+        load_annotation(fullPath);
     }
     // update the view panels
     update_views();

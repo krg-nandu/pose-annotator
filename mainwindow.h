@@ -114,6 +114,7 @@ private:
     void update_file_list();
     void update_views();
     void refresh_file_list();
+    void load_annotation(QString);
     void simulate_itemDoubleClicked();
     void goto_next();
 };
