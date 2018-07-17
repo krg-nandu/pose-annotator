@@ -19,8 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->scale->setRange(75,125);
     ui->scale->setValue(100); // this is to set the initial value
 
-    ui->xpos->setRange(-25,25);
-    ui->ypos->setRange(-25,25);
+    ui->xpos->setRange(-75,75);
+    ui->ypos->setRange(-75,75);
     ui->zpos->setRange(0,1000);
 
     ui->yaw->setRange(0,360);
@@ -321,6 +321,11 @@ void MainWindow::on_ui_file_list_itemDoubleClicked(QListWidgetItem *item)
 
     // update the view panels
     update_views();
+}
+
+void MainWindow::on_view1_mouseMoveEvent()
+{
+    qDebug() << "hi";
 }
 
 void MainWindow::on_xpos_sliderMoved(int position)

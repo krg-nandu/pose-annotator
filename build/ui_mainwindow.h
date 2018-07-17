@@ -119,6 +119,7 @@ public:
         view1 = new QLabel(pcloud);
         view1->setObjectName(QString::fromUtf8("view1"));
         view1->setGeometry(QRect(10, 30, 512, 424));
+        view1->setMouseTracking(true);
         view2 = new QLabel(pcloud);
         view2->setObjectName(QString::fromUtf8("view2"));
         view2->setGeometry(QRect(540, 30, 512, 424));

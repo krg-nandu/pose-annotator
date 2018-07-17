@@ -99,6 +99,8 @@ private slots:
     void on_r_foot_sliderMoved(int position);
     void on_vangle_sliderMoved(int position);
     void on_scale_sliderMoved(int position);
+    void on_view1_mouseMoveEvent();
+
 
 private:
     Ui::MainWindow *ui;

@@ -40,6 +40,9 @@
        <height>424</height>
       </rect>
      </property>
+     <property name="mouseTracking">
+      <bool>true</bool>
+     </property>
      <property name="text">
       <string/>
      </property>
