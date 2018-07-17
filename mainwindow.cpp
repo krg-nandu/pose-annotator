@@ -277,6 +277,9 @@ void MainWindow::update_file_list()
         if (a.isAnnotated) {
             MainWindow::ui->ui_file_list->item(row)->setForeground(Qt::green);
         }
+        else {
+            MainWindow::ui->ui_file_list->item(row)->setForeground(Qt::gray);
+        }
         row++;
     }
 }
@@ -287,6 +290,9 @@ void MainWindow::refresh_file_list()
     for (auto a : this->listOfFiles) {
         if (a.isAnnotated) {
             MainWindow::ui->ui_file_list->item(row)->setForeground(Qt::green);
+        }
+        else {
+            MainWindow::ui->ui_file_list->item(row)->setForeground(Qt::gray);
         }
         row++;
     }
@@ -317,8 +323,11 @@ void MainWindow::on_actionLoad_folder_triggered()
 
 void MainWindow::on_ui_file_list_itemDoubleClicked(QListWidgetItem *item)
 {
+    refresh_file_list();
     curRow = this->ui->ui_file_list->currentRow();
     QString fullPath = this->listOfFiles[curRow].path + "/" + item->text();
+
+    MainWindow::ui->ui_file_list->item(curRow)->setForeground(Qt::red);
 
     // Read in the depth image
     depth_image = cv::imread(fullPath.toUtf8().constData(),cv::IMREAD_ANYDEPTH);
@@ -329,7 +338,6 @@ void MainWindow::on_ui_file_list_itemDoubleClicked(QListWidgetItem *item)
     if (listOfFiles[curRow].isAnnotated) {
         //TODO
     }
-
     // update the view panels
     update_views();
 }
