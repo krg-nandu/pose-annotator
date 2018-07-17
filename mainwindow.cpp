@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->xpos->setRange(-75,75);
     ui->ypos->setRange(-75,75);
-    ui->zpos->setRange(0,1000);
+    ui->zpos->setRange(0,2500);
 
     ui->yaw->setRange(0,360);
     ui->pitch->setRange(0,360);
