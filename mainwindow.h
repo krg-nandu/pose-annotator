@@ -110,6 +110,7 @@ private:
     void update_file_list();
     void update_views();
     void refresh_file_list();
+    void simulate_itemDoubleClicked();
 };
 
 #endif // MAINWINDOW_H

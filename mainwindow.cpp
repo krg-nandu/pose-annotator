@@ -321,25 +321,44 @@ void MainWindow::on_actionLoad_folder_triggered()
     update_file_list();
 }
 
-void MainWindow::on_ui_file_list_itemDoubleClicked(QListWidgetItem *item)
+void MainWindow::simulate_itemDoubleClicked()
 {
     refresh_file_list();
     curRow = this->ui->ui_file_list->currentRow();
-    QString fullPath = this->listOfFiles[curRow].path + "/" + item->text();
-
+    QString fullPath = this->listOfFiles[curRow].path + "/" +  this->ui->ui_file_list->item(curRow)->text();
     MainWindow::ui->ui_file_list->item(curRow)->setForeground(Qt::red);
-
     // Read in the depth image
     depth_image = cv::imread(fullPath.toUtf8().constData(),cv::IMREAD_ANYDEPTH);
     // make a colorized version of the depthmap
     depth_color = IMGShow::colormap(depth_image, this->d1, this->d2,true);
-
     // if this has been annotations, load in the pose
     if (listOfFiles[curRow].isAnnotated) {
         //TODO
     }
     // update the view panels
     update_views();
+}
+
+void MainWindow::on_ui_file_list_itemDoubleClicked(QListWidgetItem *item)
+{
+//    refresh_file_list();
+//    curRow = this->ui->ui_file_list->currentRow();
+//    QString fullPath = this->listOfFiles[curRow].path + "/" + item->text();
+
+//    MainWindow::ui->ui_file_list->item(curRow)->setForeground(Qt::red);
+
+//    // Read in the depth image
+//    depth_image = cv::imread(fullPath.toUtf8().constData(),cv::IMREAD_ANYDEPTH);
+//    // make a colorized version of the depthmap
+//    depth_color = IMGShow::colormap(depth_image, this->d1, this->d2,true);
+
+//    // if this has been annotations, load in the pose
+//    if (listOfFiles[curRow].isAnnotated) {
+//        //TODO
+//    }
+//    // update the view panels
+//    update_views();
+    simulate_itemDoubleClicked();
 }
 
 void MainWindow::on_view1_mouseMoveEvent()
@@ -492,5 +511,6 @@ void MainWindow::on_button_save_clicked()
 
     // set annotation label
     this->listOfFiles[curRow].isAnnotated = true;
-    refresh_file_list();
+    this->ui->ui_file_list->setCurrentRow(curRow+1);
+    simulate_itemDoubleClicked();
 }
