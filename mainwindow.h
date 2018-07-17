@@ -105,12 +105,17 @@ private slots:
 
     void on_button_save_clicked();
 
+    void on_button_next_clicked();
+
+    void on_button_prev_clicked();
+
 private:
     Ui::MainWindow *ui;
     void update_file_list();
     void update_views();
     void refresh_file_list();
     void simulate_itemDoubleClicked();
+    void goto_next();
 };
 
 #endif // MAINWINDOW_H

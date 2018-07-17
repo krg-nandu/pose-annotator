@@ -481,6 +481,17 @@ void MainWindow::on_scale_sliderMoved(int position)
     update_views();
 }
 
+void MainWindow::goto_next()
+{
+    // if not end of file list, go to the next file
+    if ((curRow+1) < this->listOfFiles.size()) {
+        this->ui->ui_file_list->setCurrentRow(curRow+1);
+        simulate_itemDoubleClicked();
+    }
+    else {
+        refresh_file_list();
+    }
+}
 
 void MainWindow::on_button_save_clicked()
 {
@@ -511,6 +522,22 @@ void MainWindow::on_button_save_clicked()
 
     // set annotation label
     this->listOfFiles[curRow].isAnnotated = true;
-    this->ui->ui_file_list->setCurrentRow(curRow+1);
-    simulate_itemDoubleClicked();
+    goto_next();
+}
+
+void MainWindow::on_button_next_clicked()
+{
+    goto_next();
+}
+
+void MainWindow::on_button_prev_clicked()
+{
+    // if not first item in the file list, go to the previous file
+    if (curRow == 0) {
+        refresh_file_list();
+    }
+    else {
+        this->ui->ui_file_list->setCurrentRow(curRow-1);
+        simulate_itemDoubleClicked();
+    }
 }
